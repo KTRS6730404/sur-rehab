@@ -109,7 +109,7 @@ function nav(){
  if(['admin','staff','commenter'].includes(profile.role)){
    const total=settingsSub.reduce((n,row)=>n+row[2],0);
    menu+=item('設定 '+(settingsExpanded?'▾':'▸'),'window.surToggleSettings()',view==='settings',total);
-   if(settingsExpanded)menu+='<div class="sur-subnav">'+settingsSub.map(([key,label,count])=>'<button class="sur-subitem '+(view==='settings'&&settingsTab===key?'nav-active':'')+'" onclick="window.surSettings(&quot;'+key+'&quot;)">'+label+badge(count)+'</button>').join('')+'</div>';
+   if(settingsExpanded)menu+='<div class="sur-subnav">'+settingsSub.map(([key,label,count])=>'<button class="sur-subitem '+(view==='settings'&&settingsTab===key?'nav-active':'')+'" onclick="window.surSettings(&quot;'+key+'&quot;)">'+label+badge(count)+'</button>').join('')+(profile.role==='admin'?'<button class="sur-subitem" onclick="window.surTogglePermissions()">権限 '+(permissionExpanded?'▾':'▸')+'</button>'+(permissionExpanded?'<div class="sur-subnav"><button class="sur-subitem '+(settingsTab==='players'?'nav-active':'')+'" onclick="window.surSettings(&quot;players&quot;)">選手</button><button class="sur-subitem '+(settingsTab==='staff-list'?'nav-active':'')+'" onclick="window.surSettings(&quot;staff-list&quot;)">スタッフ</button></div>':''):'')+'</div>';
  }
  return menu+item('ログアウト','window.surSignout()',false)+'</nav>';
 }
