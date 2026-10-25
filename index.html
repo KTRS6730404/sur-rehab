@@ -27,7 +27,7 @@ async function loadPendingCount(){const r=await sb.from('sur_profiles').select('
 let settingsTab='account';
 window.surSettings=(tab)=>{if(profile.role!=='admin')return;settingsExpanded=true;view='settings';settingsTab=tab||settingsTab;window.surDrawSettings()};
 window.surDrawSettings=async()=>{
- const menu=[['account','アカウント'],['applications','申請'],['exercises','リハビリメニュー']];
+ const menu=[['account','アカウント'],['applications','申請'],['permissions','権限'],['exercises','リハビリメニュー']];
  const tabs='';
  let content='';
  if(settingsTab==='account'){
@@ -37,6 +37,12 @@ window.surDrawSettings=async()=>{
    if(r.error)return err(r.error);
    pendingCount=(r.data||[]).length;
    content='<div class="card"><h2>申請中 '+(pendingCount?'<span style="background:#c62828;color:white;border-radius:20px;padding:4px 10px">'+pendingCount+'件</span>':'')+'</h2>'+(r.data||[]).map(p=>'<div class="card"><b>'+esc(p.full_name)+'</b>（'+(p.requested_role==='staff'?'スタッフ':'選手')+'）'+(p.requested_role==='staff'?'<label>承認後の権限</label><select id="role_'+p.id+'"><option value="admin">管理者</option><option value="commenter">コメント可</option><option value="viewer">閲覧のみ</option></select>':'')+'<div class="line"><button onclick="window.surReviewAccount(&quot;'+p.id+'&quot;,true)">承認</button><button class="danger" onclick="window.surReviewAccount(&quot;'+p.id+'&quot;,false)">拒否</button></div></div>').join('')+(pendingCount?'':'<p>現在申請はありません。</p>')+'</div>';
+ }else if(settingsTab==='permissions'){
+   const r=await sb.from('sur_profiles').select('id,full_name,role,requested_role,grade').eq('requested_role','staff').order('full_name',{ascending:true});
+   if(r.error)return err(r.error);
+   const members=(r.data||[]).filter(p=>['admin','staff','commenter','viewer'].includes(p.role));
+   const roleLabel={admin:'管理者',staff:'スタッフ（旧権限）',commenter:'コメント可',viewer:'閲覧のみ'};
+   content='<div class="card"><h2>スタッフの権限設定</h2><p class="muted">承認済みスタッフのアクセス権限を変更できます。申請中のスタッフは「申請」で承認してください。</p>'+(members.length?members.map(p=>'<div class="card"><b>'+esc(p.full_name)+'</b><p class="muted">現在：'+esc(roleLabel[p.role]||p.role)+(p.id===user.id?'（自分）':'')+'</p><label>付与する権限</label><select id="permission_'+p.id+'" '+(p.id===user.id?'disabled':'')+'>'+[['admin','管理者'],['commenter','コメント可'],['viewer','閲覧のみ']].map(([value,label])=>'<option value="'+value+'" '+(p.role===value?'selected':'')+'>'+label+'</option>').join('')+'</select><button style="margin-top:10px" '+(p.id===user.id?'disabled':'')+' onclick="window.surSavePermission(&quot;'+p.id+'&quot;)">権限を保存</button></div>').join(''):'<p>承認済みスタッフはまだいません。</p>')+'</div>';
  }else{
    const r=await sb.from('sur_exercise_library').select('*').order('stage',{ascending:true});
    if(r.error)return err(r.error);
@@ -44,6 +50,16 @@ window.surDrawSettings=async()=>{
    window.surExercises=r.data||[];
  }
  draw(nav()+'<div class="card"><h1>設定</h1>'+tabs+'</div>'+content);
+};
+window.surSavePermission=async id=>{
+ if(profile.role!=='admin')return;
+ const role=document.getElementById('permission_'+id)?.value;
+ if(!['admin','commenter','viewer'].includes(role))return msg('権限を選択してください');
+ if(!confirm('このスタッフの権限を変更しますか？'))return;
+ const r=await sb.rpc('sur_set_staff_role',{target_id:id,next_role:role});
+ if(r.error)return err(r.error);
+ msg('権限を更新しました');
+ window.surSettings('permissions');
 };
 window.surSaveAccount=async()=>{const full_name=get('account_name');if(!full_name)return msg('氏名を入力してください');const r=await sb.from('sur_profiles').update({full_name,grade:get('account_grade')}).eq('id',user.id);if(r.error)return err(r.error);profile.full_name=full_name;profile.grade=get('account_grade');window.surSettings('account')};
 window.surExerciseForm=id=>{let x=(window.surExercises||[]).find(y=>y.id===id)||{};window.surEditingExercise=id||null;draw(nav()+'<div class="card"><h2>リハビリメニュー '+(id?'編集':'新規登録')+'</h2><label>種目名</label><input id="ex_name" value="'+esc(x.name||'')+'"><label>対象傷害</label><input id="ex_injury" value="'+esc(x.injury_category||'共通')+'"><label>Stage（リハビリ段階）</label><select id="ex_stage">'+stages.slice(0,7).map((label,i)=>'<option value="'+i+'" '+(Number(x.stage??1)===i?'selected':'')+'>'+i+'：'+esc(label)+'</option>').join('')+'</select><label>実施内容</label><textarea id="ex_description">'+esc(x.description||'')+'</textarea><label>回数・セット等</label><input id="ex_dosage" value="'+esc(x.dosage||'')+'"><label>アドバイス</label><textarea id="ex_advice">'+esc(x.advice||'')+'</textarea><div class="line"><button onclick="window.surSaveExercise()">保存</button><button class="secondary" onclick="window.surSettings(&quot;exercises&quot;)">キャンセル</button></div></div>')};
