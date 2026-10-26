@@ -199,8 +199,8 @@ function nav(){if(profile?.is_hidden)return '<nav class="no-print"><button class
  const item=(title,action,selected,count=0)=>'<button class="'+(selected?'nav-active':'')+'" onclick="'+action+'"><span style="display:inline-block;width:24px;opacity:.95">'+(surNavIcons[title.replace(/ [▾▸].*$/,'')]||'•')+'</span>'+title+badge(count)+'</button>';
  const settingsSub=profile.role==='admin'?[['account','アカウント',0],['applications','申請',pendingCount],['exercises','リハビリメニュー',0],['guide','リハビリガイド',0]]:[['applications','申請',pendingCount]];
  const weeklySub=[['報告の登録','window.surWeekly()',0],['過去の報告','window.surWeeklyHistory()',0]];
- let menu='<nav class="no-print">'+item('HOME','window.surHome()',view==='home')+item('傷害報告','window.surReports()',view==='reports');
- if(profile.role==='player'){menu+=item('リハビリメニュー','window.surPlayerMenus()',view==='player-menus')+item('リハビリガイド','window.surGuide()',view==='guide')+item('設定','window.surPlayerProfile()',view==='my-account')}
+ let menu='<nav class="no-print">'+item('HOME','window.surHome()',view==='home');
+ if(profile.role==='player'){menu+=item('リハビリメニュー','window.surPlayerMenus()',view==='player-menus')+item('傷害報告','window.surReports()',view==='reports')+item('設定','window.surPlayerProfile()',view==='my-account')+item('リハビリガイド','window.surGuide()',view==='guide')}else{menu+=item('傷害報告','window.surReports()',view==='reports')}
  if(profile.role!=='player'){
    const total=weeklySub.reduce((n,row)=>n+row[2],0);
    menu+=item('週次レポート '+(weeklyExpanded?'▾':'▸'),'window.surToggleWeekly()',view.startsWith('weekly'),total);
