@@ -121,7 +121,7 @@ window.surDrawSettings=async()=>{
    content='<div class="card"><h2>リハビリメニュー管理</h2><p class="muted">Stage別にメニューを表示します。1種目を複数の傷害カテゴリーに登録できます。</p><button onclick="window.surExerciseForm()">＋ 新規登録</button></div>'+stages.slice(0,7).map((label,stage)=>{const entries=(r.data||[]).filter(x=>Number(x.stage)===stage);return '<details class="sur-ex-stage-section" '+(stage===0?'open':'')+'><summary>Stage '+stage+'：'+esc(label)+' <span class="sur-ex-count">'+entries.length+'件</span></summary><div class="sur-ex-stage-content">'+(entries.length?entries.map(x=>'<div class="sur-ex-item"><b>'+esc(x.name)+'</b><p class="muted">対象：'+esc((Array.isArray(x.injury_categories)&&x.injury_categories.length?x.injury_categories:[x.injury_category||'共通']).join('・'))+'</p><p>'+esc(x.description||'')+'</p><div class="line"><button class="secondary" onclick="window.surExerciseForm(&quot;'+x.id+'&quot;)">編集</button><button class="danger" onclick="window.surDeleteExercise(&quot;'+x.id+'&quot;)">削除</button></div></div>').join(''):'<p class="muted">このStageの登録メニューはありません。</p>')+'</div></details>'}).join('');
    window.surExercises=r.data||[];
  }
- draw(nav()+'<div class="card"><h1>設定</h1>'+tabs+'</div>'+content);
+ draw(nav()+content);
  if(settingsTab==='players'||settingsTab==='staff-list')window.surLoadMemberAvatars();
 };
 window.surMemberEdit=id=>{const p=(window.surMemberList||[]).find(x=>x.id===id);if(!p)return;const name=prompt('氏名を編集',p.full_name);if(name===null)return;const grade=prompt('学年を編集',p.grade||'');if(grade===null)return;window.surMemberSubmit(id,'edit',name,grade)};
