@@ -43,6 +43,7 @@ window.surLoadNotifications=async(show=false)=>{
   (help.data||[]).forEach(x=>items.push({key:'help-'+x.id,title:'選手からの相談',text:x.kind+'：'+(x.message||'内容を確認してください')}));
   (cs.data||[]).forEach(x=>{if(x.current_stage===7&&!x.return_reviewed_at)items.push({key:'return-'+x.id,title:'復帰確認待ち',text:x.player_name||'選手'});else if(x.current_stage!==7&&!x.reviewed_at)items.push({key:'report-'+x.id,title:'新規傷害報告',text:x.player_name||'選手'})});
  }
+ if(profile.role==='player'){const mine=cases.filter(c=>c.player_id===user.id);if(mine.length){const ids=mine.map(c=>c.id);const hist=await sb.from('sur_stage_history').select('id,case_id,to_stage,created_at').in('case_id',ids).order('created_at',{ascending:false}).limit(50);(hist.data||[]).forEach(x=>{const c=mine.find(c=>c.id===x.case_id);items.push({key:'stage-'+x.id,title:'リハビリStage更新',text:(c?.injury_category||'傷害')+'：'+(stages[x.to_stage]||'Stage '+x.to_stage)})})}}
  surNotificationItems=items;
  const keys=items.map(x=>x.key);
  if(keys.length){const r=await sb.from('sur_notification_reads').select('notification_key').eq('user_id',user.id).in('notification_key',keys);if(!r.error)surReadNotifications=new Set((r.data||[]).map(x=>x.notification_key))}else surReadNotifications=new Set();
