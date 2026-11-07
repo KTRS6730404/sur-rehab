@@ -304,7 +304,7 @@ function nav(){if(profile?.is_hidden)return '<nav class="no-print"><button class
    if(rehabExpanded){
      const rehabItem=(label,action,selected)=>'<button class="sur-subitem '+(selected?'nav-active':'')+'" onclick="'+action+'"><span style="display:inline-block;width:23px">'+(surNavIcons[label]||'•')+'</span>'+label+'</button>';
      menu+='<div class="sur-subnav">';
-     if(profile.role==='admin')menu+=rehabItem('リハビリメニュー','window.surSettings(&quot;exercises&quot;)',view==='settings'&&settingsTab==='exercises');
+     if(profile.role==='admin')menu+=rehabItem('メニュー作成','window.surSettings(&quot;exercises&quot;)',view==='settings'&&settingsTab==='exercises');
      menu+=rehabItem('リハビリ提案','window.surTrainerPlan()',view==='trainer-plans');
      if(profile.role==='admin')menu+=rehabItem('リハビリガイド','window.surSettings(&quot;guide&quot;)',view==='settings'&&settingsTab==='guide');
      menu+='</div>';
