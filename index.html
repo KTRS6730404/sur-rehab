@@ -37,6 +37,107 @@
 .sur-today-check-summary{background:#fff;border:1px solid var(--stage-border,#d4e2ee);border-radius:8px;padding:10px;margin-top:8px;font-size:12px;line-height:1.6}
 .sur-today-check-summary p{margin:3px 0}
 @media(max-width:720px){.sur-home-metrics{grid-template-rows:none!important}}
+
+/* SUR HOME 2026 - card-based week/month calendar. The global SUR logo/header is unchanged. */
+.sur-v2home{--vh-blue:#083777;--vh-blue2:#0e4a93;--vh-yellow:#ffdc23;--vh-surface:#f5f9fe;--vh-text:#103562;max-width:100%;padding:18px 20px 20px!important;border-radius:18px!important;border-color:#dce6f2!important;box-shadow:0 8px 28px #0a3c7210!important;color:var(--vh-text)}
+.sur-v2home [hidden]{display:none!important}
+.sur-v2home h1,.sur-v2home h2,.sur-v2home p{margin-top:0}
+.sur-v2home button{transition:background-color .15s ease,border-color .15s ease,transform .15s ease}
+.sur-v2home-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 2px 14px}
+.sur-v2home-heading h1{font-size:21px;font-weight:850;letter-spacing:.02em;color:#0c3675;margin:0}
+.sur-v2home-heading>span{font-size:12px;color:#61778e;text-align:right;font-weight:600}
+.sur-v2stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-bottom:16px}
+.sur-v2stat{padding:13px 13px 12px;border:1px solid #dce8f4;background:#fff;box-shadow:0 2px 8px #123f6610;border-radius:13px;min-width:0}
+.sur-v2stat-label{display:flex;align-items:center;gap:6px;color:var(--vh-blue);font-size:12px;font-weight:750}
+.sur-v2stat-label svg{flex-shrink:0}
+.sur-v2stat-body{display:flex;align-items:center;justify-content:center;flex-direction:column;min-height:68px;background:#fff6c7;border-radius:10px;padding:7px 5px;margin-top:10px;text-align:center}
+.sur-v2stat-body b{font-size:22px;line-height:1.1;font-weight:850;color:#07336f}
+.sur-v2stat-body strong{font-size:14px;line-height:1.4;margin-top:4px;color:#173c73;overflow-wrap:anywhere}
+.sur-v2stat-body.sur-v2countdown b{font-size:26px}
+.sur-v2stat-body.sur-v2countdown small{color:#667993;font-size:11px;font-weight:650;margin-top:3px}
+.sur-v2cal{margin:0 0 16px}
+.sur-v2seg{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:50px;background:#eef2f7;padding:3px;margin-bottom:12px}
+.sur-v2seg button{display:flex;align-items:center;justify-content:center;gap:7px;background:transparent;color:#66758d;border-radius:50px;padding:10px 6px;font-size:13px;font-weight:750;border:0}
+.sur-v2seg button.active{color:white;background:linear-gradient(110deg,#073982,#1054a7);box-shadow:0 2px 7px #0c3f7930}
+.sur-v2calendar-content{padding:12px;background:#fff;border:1px solid #e2e9f1;border-radius:14px;min-height:145px}
+.sur-v2calendar-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 8px}
+.sur-v2calendar-heading strong{font-size:14px;text-align:center;font-weight:800;color:#0b3977}
+.sur-v2calendar-arrow{display:grid;place-items:center;width:31px;height:31px;padding:5px;background:#f0f5fa;color:#0a4a8c;border-radius:9px}
+.sur-v2calendar-arrow:hover{background:#e1edfa}
+.sur-v2days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.sur-v2day{position:relative;display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 1px 8px;min-height:80px;background:#f5f8fb;border:1px solid transparent;border-radius:12px;color:#123c6c;min-width:0}
+.sur-v2day:hover{background:#edf4ff}
+.sur-v2day-selected{border:2px solid #1250a3!important;background:#ffef9a!important;padding:9px 0 7px}
+.sur-v2day-today:not(.sur-v2day-selected){background:#fff6cd}
+.sur-v2day-outside{opacity:.38}
+.sur-v2weekday{font-size:11px;font-weight:700;color:#65788f}
+.sur-v2day:nth-child(7n - 1) .sur-v2weekday{color:#236bb9}
+.sur-v2day:nth-child(7n) .sur-v2weekday{color:#d4444a}
+.sur-v2date{font-size:14px;line-height:1.25;font-weight:800;white-space:nowrap}
+.sur-v2mark{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;font-size:13px;font-weight:850;line-height:1;border-radius:50%;color:#b6c3d1}
+.sur-v2mark-done{background:#1aab5e;color:white}
+.sur-v2mark-partial{background:#f8c932;color:#786000}
+.sur-v2mark-checked{background:#e5effe;color:#2271c2}
+.sur-v2mark-planned{background:#e8eff9;color:#567aa6}
+.sur-v2mark-skip{background:#e0e5eb;color:#6c7b8e}
+.sur-v2mark-none{background:transparent;color:#bdc9d7}
+.sur-v2weekdays{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));text-align:center;gap:5px;margin-bottom:6px;color:#70819a;font-size:11px;font-weight:750}
+.sur-v2weekdays .sur-v2sat{color:#236bb9}.sur-v2weekdays .sur-v2sun{color:#d4444a}
+.sur-v2days.sur-v2month{gap:4px}
+.sur-v2month .sur-v2day{min-height:53px;padding:5px 1px 4px;gap:2px;border-radius:8px}
+.sur-v2month .sur-v2day-selected{padding:4px 0 3px}
+.sur-v2month .sur-v2date{font-size:12px}
+.sur-v2month .sur-v2mark{width:15px;height:15px;font-size:11px}
+.sur-v2legend{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding-top:10px;font-size:10px;color:#75869a}
+.sur-v2legend span{display:inline-flex;align-items:center;gap:3px}
+.sur-v2legend-dot{font-style:normal;display:inline-grid;place-items:center;width:14px;height:14px;border-radius:50%;font-size:10px;font-weight:850}
+.sur-v2legend-dot.done{background:#1aab5e;color:#fff}.sur-v2legend-dot.partial{background:#f8c932;color:#785600}.sur-v2legend-dot.checked{background:#e5effe;color:#2271c2}.sur-v2legend-dot.none{color:#8798ad}
+.sur-v2selected-info{display:flex;flex-wrap:wrap;align-items:center;gap:8px;border-top:1px solid #e3ebf3;margin-top:11px;padding-top:10px;color:#3d597b;font-size:12px}
+.sur-v2selected-info b{color:#0b3977}
+.sur-v2action-row{display:flex;align-items:center;gap:10px;padding:12px 13px;background:#fff;border:1px solid #dce6f1;border-radius:13px;box-shadow:0 2px 8px #123f6610;margin-bottom:12px}
+.sur-v2action-icon{flex:0 0 auto;display:grid;place-items:center;color:#0a4a99}
+.sur-v2action-text{display:flex;flex:1;flex-direction:column;gap:3px;min-width:0}
+.sur-v2action-text b{font-size:15px}.sur-v2action-text small{font-size:11px;color:#69809b}
+.sur-v2action-row button{background:#ffdc23;color:#062d67;font-weight:850;padding:9px 12px;font-size:12px;white-space:nowrap;border-radius:25px}
+.sur-v2action-row button:hover{background:#f6d000}
+.sur-v2daily-form{margin:0 0 12px!important;border:1px solid #cddded!important;background:#f7fbff!important}
+.sur-v2daily-form .sur-daily-check-grid{gap:8px}
+.sur-v2daily-form .sur-daily-check-item{padding:10px}
+.sur-v2daily-form h3{font-size:15px;color:#0c3779}
+.sur-v2health-summary{border:1px solid #cee2f6;background:#f2f8ff;border-radius:12px;padding:13px 16px;margin-bottom:12px;font-size:13px}
+.sur-v2health-summary b{font-size:14px}.sur-v2health-summary p{margin:4px 0}
+.sur-v2menu{background:#fff;border:1px solid #dce6f1;border-radius:13px;padding:12px 13px;margin-bottom:13px;box-shadow:0 2px 8px #123f6610}
+.sur-v2menu-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.sur-v2menu-head>div{min-width:0;flex:1}
+.sur-v2menu-head b{display:block;font-size:15px}.sur-v2menu-head small{font-size:11px;color:#60758b;display:block;margin-top:4px;line-height:1.4;overflow-wrap:anywhere}
+.sur-v2menu-button{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#ffdc23;color:#073773;font-size:14px;font-weight:850;padding:11px 12px;border-radius:24px}
+.sur-v2menu-button:hover{background:#f6d000}
+.sur-v2footer{display:flex;align-items:center;flex-wrap:wrap;gap:9px;border-top:1px solid #e4ebf3;padding:13px 2px 0}
+.sur-v2footer button{display:inline-flex;gap:5px;align-items:center;background:#edf4fc;color:#0c4382;font-size:12px;font-weight:750;padding:8px 10px;border-radius:8px}
+.sur-v2footer button:hover{background:#deecfb}
+.sur-v2footer button.sur-v2previous{background:#fdf0f1;color:#af2638}
+.sur-v2footer button.sur-v2previous:hover{background:#f9dfe3}
+.sur-v2footer>span{font-size:11px;color:#8191a5;margin-left:auto}
+.sur-v2previous-panel{border:1px solid #d9e7f3;padding:12px;border-radius:12px;margin-top:12px}
+@media(max-width:720px){
+ .sur-v2home{padding:13px!important;margin:10px 0!important}
+ .sur-v2home-heading{margin-bottom:12px}
+ .sur-v2stats{gap:8px}
+ .sur-v2stat{padding:10px}
+ .sur-v2stat-body{min-height:58px;margin-top:7px}
+ .sur-v2stat-body b{font-size:19px}.sur-v2stat-body.sur-v2countdown b{font-size:22px}
+ .sur-v2stat-body strong{font-size:12px}
+ .sur-v2stat-label{font-size:11px;gap:4px}
+ .sur-v2calendar-content{padding:9px}
+ .sur-v2days{gap:3px}
+ .sur-v2day{min-height:74px;padding:9px 1px 7px}
+ .sur-v2date{font-size:12px}
+ .sur-v2month .sur-v2day{min-height:49px}
+ .sur-v2action-row{padding:11px 10px;gap:8px}
+ .sur-v2action-row button{padding:8px 9px;font-size:11px}
+ .sur-v2footer>span{margin-left:0}
+}
+
 </style></head><body><header class="top"><div class="sur-header"><div class="sur-logo-holder"><img src="sur-logo-gold.svg?v=20261108" alt="SUR" class="sur-logo-image" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="sur-wordmark">SUR</div></div><div class="sur-header-copy"><div class="sur-expanded"><span class="sur-initial">S</span>tep <span class="sur-initial">U</span>p <span class="sur-initial">R</span>ehabilitation</div><div class="subtitle">筑陽学園高校サッカー部<br>リハビリサポートシステム</div></div></div><div id="sur-header-right" class="sur-header-right" style="display:none"></div><div id="sur-header-popover"></div></header><main id="app"><div class="card">接続しています…</div></main><script>
 (function(){const header=document.querySelector('.top');if(!header)return;const sync=()=>document.documentElement.style.setProperty('--sur-header-height',header.getBoundingClientRect().height+'px');sync();window.addEventListener('resize',sync);if(typeof ResizeObserver!=='undefined')new ResizeObserver(sync).observe(header)})();
 window.surBootPhase='認証ライブラリの読み込み開始前';
@@ -361,63 +462,276 @@ function surPlayerHome(){
  if(!mine.length)return '<div class="card"><h1>現在の傷害報告</h1><p class="muted">現在リハビリ中の傷害報告はありません。</p><button onclick="window.surNew()">＋ 傷害報告の新規登録</button></div>';
  return mine.map(c=>{const elapsed=surDays(c.injured_on,today()),remain=surDays(today(),c.target_return_on);return '<div class="card"><h2>現在の傷害報告</h2><button class="report-mini" onclick="window.surCase(&quot;'+c.id+'&quot;)"><b>'+esc(c.injury_category==='その他'?c.injury_other:c.injury_category)+'</b><span>'+esc(c.body_part==='その他'?c.body_part_other:c.body_part)+'｜'+esc(c.side||'')+'</span><span>'+esc(c.injured_on)+'</span><span>詳細 ›</span></button></div><div class="card"><h2>現在のステージとリハビリメニュー</h2><p><b>Stage '+c.current_stage+'：'+esc(stages[c.current_stage])+'</b></p><p class="muted">'+(c.current_stage===0?'患部外リハ（傷害部位に応じた候補メニュー）':esc(menu[c.current_stage]?.[0]||'ステージに応じたリハビリ'))+'</p><button onclick="window.surCase(&quot;'+c.id+'&quot;);window.surStage()">リハビリメニューを確認</button><div class="sur-player-metrics"><div><span>リハビリ経過日数</span><b>'+(elapsed===null?'—':Math.max(0,elapsed)+'日')+'</b></div><div><span>復帰目標日</span><b>'+esc(c.target_return_on||'未設定')+'</b></div><div><span>目標日まで</span><b>'+(remain===null?'—':remain>0?'あと'+remain+'日':remain===0?'本日':Math.abs(remain)+'日経過')+'</b></div></div></div>'}).join('')
 }
+
+const surV2CalendarStates=new Map();
+const surV2DailyCache=new Map();
+function surV2Icon(name,size=21){
+ const p={
+   stage:'<path d="m13.5 3.5 2.6 2.4-2.1 2.1-2.1-1.2-2.1 3.3 3.1 2.2-1.1 4.6M9.8 10.1l-3.2 2.1-3 .3M13 12.5l3 3.4 3.1.6"/><circle cx="15.1" cy="2.9" r="1.6"/>',
+   calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/>',
+   heart:'<path d="M20.2 8.9c0 4.6-8.2 10.7-8.2 10.7S3.8 13.5 3.8 8.9a4.6 4.6 0 0 1 8.2-2.7 4.6 4.6 0 0 1 8.2 2.7Z"/><path d="M6.2 12h3l1.7-3 2.3 6 1.7-3h3"/>',
+   menu:'<rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 5v14M17 5v14M1.8 10v4M22.2 10v4"/>',
+   chevron:'<path d="m9 5 7 7-7 7"/>',
+   left:'<path d="m15 5-7 7 7 7"/>',
+   right:'<path d="m9 5 7 7-7 7"/>',
+   report:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/>',
+   check:'<path d="m5 12 4 4L19 6"/>',
+   history:'<path d="M3 12a9 9 0 1 0 2.6-6.4M3 4v4h4M12 7v5l3 2"/>'
+ };
+ return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(p[name]||p.menu)+'</svg>';
+}
+
+function surV2DateAdd(iso,amount){
+ const [y,m,d]=String(iso).split('-').map(Number);
+ const v=new Date(Date.UTC(y,m-1,d+amount));
+ return [v.getUTCFullYear(),String(v.getUTCMonth()+1).padStart(2,'0'),String(v.getUTCDate()).padStart(2,'0')].join('-');
+}
+
+function surV2WeekStart(iso){
+ const [y,m,d]=iso.split('-').map(Number);
+ const wd=new Date(Date.UTC(y,m-1,d)).getUTCDay();
+ return surV2DateAdd(iso,-((wd+6)%7));
+}
+
+function surV2MoveMonth(iso,steps){
+ const [y,m,d]=iso.split('-').map(Number);
+ const first=new Date(Date.UTC(y,m-1+steps,1));
+ const end=new Date(Date.UTC(first.getUTCFullYear(),first.getUTCMonth()+1,0)).getUTCDate();
+ return surV2DateAdd([first.getUTCFullYear(),String(first.getUTCMonth()+1).padStart(2,'0'),'01'].join('-'),Math.min(d,end)-1);
+}
+
+function surV2CalRange(state){
+ if(state.mode==='week'){
+  const from=surV2WeekStart(state.anchor);
+  return {from,to:surV2DateAdd(from,6)};
+ }
+ const month=state.anchor.slice(0,7)+'-01';
+ const first=surV2WeekStart(month);
+ const [y,m]=month.split('-').map(Number);
+ const last=new Date(Date.UTC(y,m,0)).getUTCDate();
+ const end=surV2DateAdd(month,last-1);
+ const lastDay=new Date(Date.UTC(y,m-1,last)).getUTCDay();
+ return {from:first,to:surV2DateAdd(end,(7-lastDay)%7)};
+}
+
+function surV2HomeState(id){
+ const key=surDailyDay();
+ let v=surV2CalendarStates.get(id);
+ if(!v){v={mode:'week',anchor:key,selected:key,displayDay:key,records:new Map(),sequence:0,loading:true};surV2CalendarStates.set(id,v)}
+ else if(v.displayDay!==key){
+  if(v.selected===v.displayDay){v.selected=key;v.anchor=key}
+  v.displayDay=key;
+ }
+ return v;
+}
+
+function surV2DayStatus(data){
+ if(!data)return 'none';
+ const status=data.session?.exercises?.status;
+ if(status==='done')return 'done';
+ if(status==='partial')return 'partial';
+ if(status==='skip')return 'skip';
+ if(data.check)return 'checked';
+ if(data.plan?.exercise_ids?.length)return 'planned';
+ return 'none';
+}
+
+function surV2CalendarHTML(id){
+ const st=surV2HomeState(id),range=surV2CalRange(st),current=surDailyDay();
+ const weekdays=['月','火','水','木','金','土','日'];
+ const title=st.mode==='month'?Number(st.anchor.slice(0,4))+'年'+Number(st.anchor.slice(5,7))+'月':Number(range.from.slice(5,7))+'月'+Number(range.from.slice(8))+'日 〜 '+Number(range.to.slice(5,7))+'月'+Number(range.to.slice(8))+'日';
+ const dates=[],total=surDays(range.from,range.to)+1;
+ for(let i=0;i<total;i++)dates.push(surV2DateAdd(range.from,i));
+ const buttons=dates.map((date,i)=>{
+  const x=st.records.get(date),state=surV2DayStatus(x),selected=date===st.selected,isToday=date===current;
+  const wd=weekdays[i%7],anotherMonth=st.mode==='month'&&date.slice(0,7)!==st.anchor.slice(0,7);
+  const mark=state==='done'?'✓':state==='partial'?'◐':state==='skip'?'—':state==='checked'?'●':state==='planned'?'○':'';
+  const label={done:'リハビリ完了',partial:'一部実施',skip:'実施できず',checked:'体調報告済み',planned:'メニュー登録済み',none:'記録なし'}[state];
+  return `<button type="button" aria-label="${esc(date+' '+label)}" aria-pressed="${selected?'true':'false'}" class="sur-v2day ${selected?'sur-v2day-selected':''} ${isToday?'sur-v2day-today':''} ${anotherMonth?'sur-v2day-outside':''}" onclick="window.surV2SelectDay(&quot;${id}&quot;,&quot;${date}&quot;)">
+     ${st.mode==='week'?`<small class="sur-v2weekday">${wd}</small>`:''}
+     <span class="sur-v2date">${st.mode==='week'?esc(date.slice(5,7).replace(/^0/,'')+'/'+String(Number(date.slice(8)))):Number(date.slice(8))}</span>
+     <span class="sur-v2mark sur-v2mark-${state}">${mark||'·'}</span>
+  </button>`;
+ }).join('');
+ const chosen=st.records.get(st.selected);
+ const selectedText=st.selected===current?'':`<div class="sur-v2selected-info">
+  <b>${Number(st.selected.slice(5,7))}月${Number(st.selected.slice(8))}日の記録</b>
+  <span>${chosen?.check?'体調：NRS '+esc(chosen.check.pain)+'／腫れ '+esc(chosen.check.swelling):'体調：記録なし'}</span>
+  <span>${chosen?.session?'リハビリ：'+({done:'完了',partial:'一部実施',skip:'実施できず'}[chosen.session.exercises?.status]||'記録あり'):'リハビリ：記録なし'}</span>
+ </div>`;
+ return `<div class="sur-v2calendar-heading">
+  <button type="button" class="sur-v2calendar-arrow" onclick="window.surV2ShiftCal(&quot;${id}&quot;,-1)" aria-label="前の${st.mode==='week'?'週':'月'}">${surV2Icon('left',18)}</button>
+  <strong>${title}</strong>
+  <button type="button" class="sur-v2calendar-arrow" onclick="window.surV2ShiftCal(&quot;${id}&quot;,1)" aria-label="次の${st.mode==='week'?'週':'月'}">${surV2Icon('right',18)}</button>
+ </div>
+ ${st.mode==='month'?'<div class="sur-v2weekdays">'+weekdays.map((x,i)=>'<span class="'+(i===5?'sur-v2sat':i===6?'sur-v2sun':'')+'">'+x+'</span>').join('')+'</div>':''}
+ <div class="sur-v2days ${st.mode==='month'?'sur-v2month':'sur-v2week'}">${buttons}</div>
+ <div class="sur-v2legend"><span><i class="sur-v2legend-dot done">✓</i>完了</span><span><i class="sur-v2legend-dot partial">◐</i>一部実施</span><span><i class="sur-v2legend-dot checked">●</i>体調報告</span><span><i class="sur-v2legend-dot none">—</i>記録なし</span></div>
+ ${selectedText}`;
+}
+
 function surRehabUI(){
  const list=cases.filter(c=>c.player_id===user.id&&c.current_stage!==7);
- if(!list.length)return '<div class="card"><h2>今日のリハビリ</h2><p>現在実施中の傷害報告はありません。</p><button onclick="window.surNew()">＋ 傷害報告を登録</button></div>';
+ if(!list.length)return '<div class="card"><h2>現在のリハビリ</h2><p>現在実施中の傷害報告はありません。</p><button onclick="window.surNew()">＋ 傷害報告を登録</button></div>';
  return list.map(c=>{
-   const id=esc(c.id), injuryDays=surDays(c.injured_on,today());
-   const early=injuryDays!==null&&injuryDays>=0&&injuryDays<=2;
-   const remain=c.target_return_on?surDays(today(),c.target_return_on):null;
-   const countdown=remain===null?'未設定':remain>0?'あと'+remain+'日':remain===0?'今日が目標日':Math.abs(remain)+'日超過';
-   const stage=Math.max(0,Math.min(6,Number(c.current_stage)||0));
-   return `
-<div class="card sur-player-home-card">
-  <div id="sur-daily-${id}" class="sur-daily-check-panel" hidden>
-    <h3>今日の体調（30秒）</h3>
+  const id=esc(c.id),st=surV2HomeState(c.id);
+  const remain=c.target_return_on?surDays(surDailyDay(),c.target_return_on):null;
+  const countdown=remain===null?'未設定':remain>0?'あと'+remain+'日':remain===0?'今日が目標日':Math.abs(remain)+'日超過';
+  const spanDay=surDays(c.injured_on,surDailyDay());
+  const stage=Math.max(0,Math.min(6,Number(c.current_stage)||0));
+  return `<section class="card sur-v2home" data-case-id="${id}">
+   <div class="sur-v2home-heading"><h1>HOME</h1><span>${esc(c.injury_category==='その他'?c.injury_other||'傷害':c.injury_category)} ／ ${esc(c.body_part==='その他'?c.body_part_other||'部位未設定':c.body_part||'')}</span></div>
+   <div class="sur-v2stats">
+    <div class="sur-v2stat"><div class="sur-v2stat-label">${surV2Icon('stage',20)}<span>現在のリハビリStage</span></div><div class="sur-v2stat-body"><b>Stage ${stage}</b><strong>${esc(stages[stage]||'')}</strong></div></div>
+    <div class="sur-v2stat"><div class="sur-v2stat-label">${surV2Icon('calendar',20)}<span>復帰目標</span></div><div class="sur-v2stat-body sur-v2countdown"><b>${esc(countdown)}</b><small>${c.target_return_on?'目標日 '+esc(c.target_return_on.slice(5).replace('-','/')):'目標日未設定'}</small></div></div>
+   </div>
+   <div class="sur-v2cal">
+    <div class="sur-v2seg" role="group" aria-label="カレンダー表示切替">
+      <button type="button" class="${st.mode==='week'?'active':''}" aria-pressed="${st.mode==='week'}" onclick="window.surV2SetMode(&quot;${id}&quot;,&quot;week&quot;)">${surV2Icon('calendar',17)}週間</button>
+      <button type="button" class="${st.mode==='month'?'active':''}" aria-pressed="${st.mode==='month'}" onclick="window.surV2SetMode(&quot;${id}&quot;,&quot;month&quot;)">${surV2Icon('calendar',17)}月間</button>
+    </div>
+    <div id="sur-v2calendar-${id}" class="sur-v2calendar-content" aria-live="polite"><p class="muted">カレンダーを読み込み中…</p></div>
+   </div>
+   <div class="sur-v2action-row">
+    <span class="sur-v2action-icon">${surV2Icon('heart',23)}</span>
+    <div class="sur-v2action-text"><b>今日の体調</b><small id="sur-v2daily-status-${id}">確認中…</small></div>
+    <button type="button" id="sur-v2daily-button-${id}" disabled onclick="window.surV2ToggleHealth(&quot;${id}&quot;)">確認中…</button>
+   </div>
+   <div id="sur-daily-${id}" class="sur-daily-check-panel sur-v2daily-form" hidden>
+    <h3>今日の体調を報告</h3>
     <div class="sur-daily-check-grid">
       <div class="sur-daily-check-item"><label>痛み NRS <span id="score_${id}">2</span></label><input type="range" id="pain_${id}" min="0" max="10" value="2" oninput="document.getElementById('score_${id}').textContent=this.value"></div>
       <div class="sur-daily-check-item"><label>腫れ</label><select id="swell_${id}"><option>なし</option><option>少し</option><option>強い</option></select></div>
       <div class="sur-daily-check-item"><label>前回と比較</label><select id="trend_${id}"><option>良い</option><option selected>同じ</option><option>悪い</option></select></div>
     </div>
-    <button class="sur-daily-save" onclick="window.surSaveDaily(&quot;${id}&quot;)">体調を保存</button>
-  </div>
-  <div class="sur-home-overview">
-    <div class="sur-player-metrics sur-home-metrics">
-      <div class="sur-stage-card sur-home-stage-card sur-stage-${stage}">
-        <span class="sur-stage-label">現在のリハビリStage</span>
-        <b>Stage ${stage}：${esc(stages[stage]||'')}</b>
-        <button id="sur-today-check-button-${id}" class="sur-home-today-link" type="button" onclick="window.surToggleSavedDaily(&quot;${id}&quot;)" hidden>本日の体調を見る ›</button>
-        <div id="sur-today-check-summary-${id}" class="sur-today-check-summary" hidden></div>
-        <button class="sur-previous-menu-btn sur-home-action" type="button" onclick="window.surPreviousMenu(&quot;${id}&quot;)">前回のメニューを見る ›</button>
-      </div>
-      <div class="${early?'sur-early-injury':''}">
-        <span>受傷から</span><b>${injuryDays===null?'—':Math.max(0,injuryDays)+'日'}</b>
-        ${early?'<p class="sur-early-message">受傷直後の3日間は、患部を保護し、必要に応じて短時間の冷却と適度な圧迫を繰り返しましょう。冷やしすぎ・締めすぎに注意し、医師・スタッフの指示を優先してください。</p>':''}
-        <div class="sur-home-return-inline">
-          <span>復帰目標日 <small>${esc(c.target_return_on||'未設定')}</small></span>
-          <b class="sur-return-countdown">${esc(countdown)}</b>
-        </div>
-        <button class="sur-home-detail-link" onclick="window.surCase(&quot;${id}&quot;)">傷害報告の詳細を見る ›</button>
-      </div>
-    </div>
-    <div class="sur-home-radar" id="sur-home-radar-${id}"><h3>体力要素の到達状況</h3><p class="muted">評価を読み込み中…</p></div>
-  </div>
-  <div id="sur-prev-menu-${id}" class="sur-prev-menu sur-home-prev-menu" hidden></div>
-  <div class="sur-pain-change-card"><h3>痛みの変化</h3><div id="daily-progress-${id}">読み込み中…</div></div>
-</div>`;
+    <button class="sur-daily-save" type="button" onclick="window.surSaveDaily(&quot;${id}&quot;)">体調を保存する</button>
+   </div>
+   <div id="sur-today-check-summary-${id}" class="sur-v2health-summary" hidden></div>
+   <div class="sur-v2menu">
+     <div class="sur-v2menu-head"><span class="sur-v2action-icon">${surV2Icon('menu',23)}</span><div><b>本日のメニュー</b><small id="sur-v2menu-preview-${id}">確認中…</small></div></div>
+     <button type="button" class="sur-v2menu-button" onclick="window.surPlayerMenus()">メニューを見る ${surV2Icon('chevron',17)}</button>
+   </div>
+   <div class="sur-v2footer">
+      <button type="button" onclick="window.surCase(&quot;${id}&quot;)">${surV2Icon('report',17)}傷害報告の詳細 ${surV2Icon('chevron',16)}</button>
+      <button type="button" class="sur-v2previous" onclick="window.surPreviousMenu(&quot;${id}&quot;)">${surV2Icon('history',17)}前回のメニュー ${surV2Icon('chevron',16)}</button>
+      <span>受傷から${spanDay===null?'—':Math.max(0,spanDay)+'日'}</span>
+   </div>
+   <div id="sur-prev-menu-${id}" class="sur-prev-menu sur-v2previous-panel" hidden></div>
+  </section>`;
  }).join('');
 }
 
-window.surSyncDailyHome=(id,entry)=>{
- const panel=document.getElementById('sur-daily-'+id),button=document.getElementById('sur-today-check-button-'+id),summary=document.getElementById('sur-today-check-summary-'+id);
+function surV2RenderCalendar(id){
+ const box=document.getElementById('sur-v2calendar-'+id);
+ if(!box)return;
+ box.innerHTML=surV2CalendarHTML(id);
+ const panel=box.closest('.sur-v2cal');
+ if(panel){
+  panel.querySelectorAll('.sur-v2seg button').forEach((btn,i)=>{
+   const chosen=surV2HomeState(id).mode===(i===0?'week':'month');
+   btn.classList.toggle('active',chosen);btn.setAttribute('aria-pressed',String(chosen));
+  });
+ }
+}
+
+async function surV2LoadCalendar(id){
+ const st=surV2HomeState(id),range=surV2CalRange(st),seq=++st.sequence;
+ const box=document.getElementById('sur-v2calendar-'+id);if(!box)return;
+ box.innerHTML='<p class="muted">カレンダーを読み込み中…</p>';
+ const [checks,sessions,plans]=await Promise.all([
+  sb.from('sur_daily_checks').select('day,pain,swelling,trend').eq('case_id',id).gte('day',range.from).lte('day',range.to).limit(70),
+  sb.from('sur_sessions').select('completed_on,created_at,exercises').eq('case_id',id).gte('completed_on',range.from).lte('completed_on',range.to).order('created_at',{ascending:true}).limit(300),
+  sb.from('sur_daily_menu_plans').select('day,exercise_ids').eq('case_id',id).gte('day',range.from).lte('day',range.to).limit(70)
+ ]);
+ if(seq!==st.sequence||!box.isConnected)return;
+ if(checks.error||sessions.error||plans.error){
+  box.innerHTML='<p class="muted">記録を取得できませんでした。再度お試しください。</p><button type="button" class="secondary" onclick="window.surV2LoadCalendar(&quot;'+esc(id)+'&quot;)">再読み込み</button>';
+  return;
+ }
+ const record=new Map();
+ const slot=day=>{if(!record.has(day))record.set(day,{});return record.get(day)};
+ (checks.data||[]).forEach(x=>{slot(x.day).check=x});
+ (sessions.data||[]).forEach(x=>{slot(x.completed_on).session=x});
+ (plans.data||[]).forEach(x=>{slot(x.day).plan=x});
+ st.records=record;surV2RenderCalendar(id);
+}
+
+function surV2SetMode(id,mode){
+ if(!['week','month'].includes(mode))return;
+ const st=surV2HomeState(id);if(st.mode===mode)return;
+ st.mode=mode;st.anchor=st.selected;
+ surV2LoadCalendar(id);
+}
+
+function surV2ShiftCal(id,dir){
+ const st=surV2HomeState(id);if(dir!==1&&dir!==-1)return;
+ st.selected=st.mode==='week'?surV2DateAdd(st.selected,dir*7):surV2MoveMonth(st.selected,dir);
+ st.anchor=st.selected;
+ surV2LoadCalendar(id);
+}
+
+function surV2SelectDay(id,day){
+ const st=surV2HomeState(id);st.selected=day;surV2RenderCalendar(id);
+}
+
+function surSyncDailyHome(id,entry){
+ surV2DailyCache.set(id,{day:surDailyDay(),entry:entry||null});
+ const panel=document.getElementById('sur-daily-'+id),
+  status=document.getElementById('sur-v2daily-status-'+id),
+  button=document.getElementById('sur-v2daily-button-'+id),
+  summary=document.getElementById('sur-today-check-summary-'+id);
  const saved=!!entry;
- if(panel)panel.hidden=saved;
- if(button)button.hidden=!saved;
- if(summary){summary.hidden=true;summary.innerHTML=saved?'<b>本日の体調（記録済み）</b><p>痛み NRS：'+esc(entry.pain)+'</p><p>腫れ：'+esc(entry.swelling||'未記録')+'</p><p>前回と比較：'+esc(entry.trend||'未記録')+'</p>':''}
-};
-window.surToggleSavedDaily=id=>{const box=document.getElementById('sur-today-check-summary-'+id);if(box)box.hidden=!box.hidden};
+ if(panel)panel.hidden=true;
+ if(status)status.textContent=saved?'報告済み':'未入力';
+ if(button){button.disabled=false;button.textContent=saved?'本日の体調を見る ›':'体調を報告する ›'}
+ if(summary){
+  summary.hidden=true;
+  summary.innerHTML=saved?'<b>本日の体調</b><p>痛み NRS：'+esc(entry.pain)+'</p><p>腫れ：'+esc(entry.swelling||'未記録')+'</p><p>前回と比較：'+esc(entry.trend||'未記録')+'</p>':'';
+ }
+}
+
+function surV2ToggleHealth(id){
+ const st=surV2DailyCache.get(id);
+ if(!st||st.day!==surDailyDay())return;
+ const box=document.getElementById('sur-daily-'+id),summary=document.getElementById('sur-today-check-summary-'+id);
+ if(st.entry){if(summary)summary.hidden=!summary.hidden;if(box)box.hidden=true}
+ else{if(box){box.hidden=!box.hidden;if(!box.hidden)box.querySelector('input[type="range"]')?.focus()}if(summary)summary.hidden=true}
+}
+
+async function surV2LoadHomeDaily(id){
+ const r=await sb.from('sur_daily_checks').select('day,pain,swelling,trend').eq('case_id',id).eq('day',surDailyDay()).maybeSingle();
+ const button=document.getElementById('sur-v2daily-button-'+id),status=document.getElementById('sur-v2daily-status-'+id);
+ if(r.error){if(status)status.textContent='読み込みできません';if(button){button.disabled=false;button.textContent='再読み込み';button.onclick=()=>surV2LoadHomeDaily(id)}return}
+ surSyncDailyHome(id,r.data);
+}
+
+async function surV2LoadMenuPreview(id){
+ const host=document.getElementById('sur-v2menu-preview-'+id);if(!host)return;
+ const r=await sb.from('sur_daily_menu_plans').select('exercise_ids').eq('case_id',id).eq('day',today()).maybeSingle();
+ if(!host.isConnected)return;
+ if(r.error){host.textContent='メニューを確認してください';return}
+ const ids=Array.isArray(r.data?.exercise_ids)?r.data.exercise_ids:[];
+ if(!ids.length){host.textContent='メニューを選んで登録する';return}
+ const lib=await sb.from('sur_exercise_library').select('id,name').in('id',ids.slice(0,2));
+ if(!host.isConnected)return;
+ if(lib.error){host.textContent=ids.length+'種目を登録済み';return}
+ const byId=new Map((lib.data||[]).map(x=>[x.id,x.name]));
+ host.textContent=ids.slice(0,2).map(x=>byId.get(x)).filter(Boolean).join('・')+(ids.length>2?' ほか'+(ids.length-2)+'種目':'')||ids.length+'種目を登録済み';
+}
+
+function surV2InitHome(){
+ const list=cases.filter(c=>c.player_id===user.id&&c.current_stage!==7);
+ list.forEach(c=>{surV2LoadCalendar(c.id);surV2LoadHomeDaily(c.id);surV2LoadMenuPreview(c.id)});
+}
+window.surV2LoadCalendar=surV2LoadCalendar;
+window.surV2SetMode=surV2SetMode;
+window.surV2ShiftCal=surV2ShiftCal;
+window.surV2SelectDay=surV2SelectDay;
+window.surV2ToggleHealth=surV2ToggleHealth;
+window.surSyncDailyHome=surSyncDailyHome;
+
 window.surLoadHomeRadars=async()=>{if(!user||profile?.role!=='player')return;const targets=cases.filter(c=>c.player_id===user.id&&c.current_stage!==7);await Promise.all(targets.map(async c=>{const host=document.getElementById('sur-home-radar-'+c.id);if(!host)return;const r=await sb.from('sur_fitness_assessments').select('category,element,status,created_at').eq('case_id',c.id).order('created_at',{ascending:false}).limit(100);if(!host.isConnected)return;if(r.error){host.innerHTML='<h3>体力要素の到達状況</h3><p class="muted">評価を取得できませんでした。</p><button type="button" class="sur-radar-menu-btn" onclick="window.surPlayerMenus()">リハビリメニューを見る ›</button>';return}const ratings=[...new Map((r.data||[]).reverse().map(x=>[x.category+'-'+x.element,x])).values()];host.innerHTML='<h3>体力要素の到達状況</h3>'+surFitnessRadar(ratings)+'<button type="button" class="sur-radar-menu-btn" onclick="window.surPlayerMenus()">リハビリメニューを見る ›</button>'}))};
-window.surSaveDaily=async id=>{const row={case_id:id,player_id:user.id,day:surDailyDay(),pain:Number(get('pain_'+id)),swelling:get('swell_'+id),trend:get('trend_'+id)};const r=await sb.from('sur_daily_checks').upsert(row,{onConflict:'case_id,day'});if(r.error)return err(r.error);window.surSyncDailyHome(id,row);const loaded=await window.surLoadDaily(id);if(loaded){msg('本日の体調を保存しました。「本日の体調を見る」から内容を確認できます。')}else msg('体調は保存しましたが、メニューの再取得に失敗しました。')};
+window.surSaveDaily=async id=>{const row={case_id:id,player_id:user.id,day:surDailyDay(),pain:Number(get('pain_'+id)),swelling:get('swell_'+id),trend:get('trend_'+id)};const r=await sb.from('sur_daily_checks').upsert(row,{onConflict:'case_id,day'});if(r.error)return err(r.error);window.surSyncDailyHome(id,row);if(view==='home'){surV2LoadCalendar(id);msg('本日の体調を保存しました。');return}const loaded=await window.surLoadDaily(id);if(loaded){msg('本日の体調を保存しました。')}else msg('体調は保存しましたが、メニューの再取得に失敗しました。')};
 window.surAskHelp=(id,kind)=>{const el=document.getElementById('help-box-'+id);if(!el)return;const buttons=el.previousElementSibling?.querySelectorAll('.sur-help-choice')||[];const chosen=Array.from(buttons).find(b=>b.dataset.helpKind===kind);if(chosen?.classList.contains('sur-help-selected')){chosen.classList.remove('sur-help-selected');el.innerHTML='';return}buttons.forEach(b=>b.classList.toggle('sur-help-selected',b.dataset.helpKind===kind));const tips={痛み:'運動を中断し、スタッフに相談してください。強い症状は医療機関へ。',方法:'動画や説明を確認。不明なら無理に実施しないでください。',難しい:'自己判断で負荷を増やさず、代替案をスタッフに相談してください。',相談:'気になることを短く入力してください。'};el.innerHTML='<p class="warn">'+tips[kind]+'</p><textarea id="help-text-'+id+'" placeholder="詳しい状況（任意）"></textarea><button onclick="window.surSubmitHelp(&quot;'+id+'&quot;,&quot;'+kind+'&quot;)">スタッフに送信</button>'};
 window.surSubmitHelp=async(id,kind)=>{const r=await sb.from('sur_player_help').insert({case_id:id,player_id:user.id,kind,message:get('help-text-'+id)});if(r.error)return err(r.error);document.getElementById('help-box-'+id).textContent='相談を送りました。緊急時は直接スタッフに連絡してください。'};
 window.surPreviousMenu=async id=>{
@@ -511,7 +825,7 @@ window.surDailyBoundaryTimer=window.surDailyBoundaryTimer||setInterval(surCheckD
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)surCheckDailyBoundary()});
 window.surLoadStaffAlerts=async()=>{const box=document.getElementById('sur-staff-alerts');if(!box)return;const [help,checks,sessions]=await Promise.all([sb.from('sur_player_help').select('*').eq('status','open').order('created_at',{ascending:false}).limit(100),sb.from('sur_daily_checks').select('*').order('day',{ascending:false}).limit(300),sb.from('sur_sessions').select('case_id,completed_on').order('completed_on',{ascending:false}).limit(300)]);if(help.error||checks.error||sessions.error){box.textContent='確認事項を取得できませんでした';return}const urgent=(checks.data||[]).filter(x=>x.pain>=5||x.swelling==='強い'||x.trend==='悪い');const stalled=cases.filter(c=>c.current_stage!==7&&!((checks.data||[]).some(x=>x.case_id===c.id&&surDays(x.day,today())<=7)||(sessions.data||[]).some(x=>x.case_id===c.id&&surDays(x.completed_on,today())<=7)));box.innerHTML='<h2>スタッフ確認事項</h2><p class="muted">相談 → 症状悪化 → 記録なしの順で確認してください。記録なし＝未実施とは限りません。</p><section class="sur-alert-section sur-alert-help" style="background:#f2f7ff!important;border:1px solid #d7e6fa!important"><h3>相談（'+(help.data||[]).length+'）</h3>'+((help.data||[]).map(x=>{const c=cases.find(c=>c.id===x.case_id);return '<div class="report-mini" style="cursor:default"><b>'+esc(c?.player_name||'選手')+'</b><span>'+esc(x.kind)+'：'+esc(x.message||'詳細なし')+'</span><button onclick="window.surResolveHelp(&quot;'+x.id+'&quot;)">対応済み</button></div>'}).join(''))+'</section><section class="sur-alert-section sur-alert-urgent" style="background:#f2f7ff!important;border:1px solid #d7e6fa!important"><h3>体調変化・強い症状（'+urgent.length+'）</h3>'+urgent.slice(0,25).map(x=>{const c=cases.find(c=>c.id===x.case_id);return '<button class="report-mini" onclick="window.surCase(&quot;'+x.case_id+'&quot;)"><b>'+esc(c?.player_name||'選手')+'</b><span>NRS '+x.pain+' / '+esc(x.swelling)+' / '+esc(x.trend)+'</span><span>'+esc(x.day)+'</span></button>'}).join('')+'</section><section class="sur-alert-section sur-alert-stalled" style="background:#f2f7ff!important;border:1px solid #d7e6fa!important"><h3>7日以内に記録なし・要確認（'+stalled.length+'）</h3>'+stalled.slice(0,25).map(c=>'<button class="report-mini" onclick="window.surCase(&quot;'+c.id+'&quot;)"><b>'+esc(c.player_name)+'</b><span>状況確認</span></button>').join('')+'</section>'};
 window.surResolveHelp=async id=>{const r=await sb.from('sur_player_help').update({status:'resolved',resolved_at:new Date().toISOString()}).eq('id',id);if(r.error)return err(r.error);window.surLoadStaffAlerts()};
-function home(){if(profile?.is_hidden)return window.surHiddenHome();settingsExpanded=false;weeklyExpanded=false;permissionExpanded=false;view='home';const isStaff=profile.role!=='player';const statuses=[['rehab','リハビリ','#c63f49'],['partial','部分合流','#e28a26'],['observation','経過観察','#21966a']];const activeCases=cases.filter(c=>c.current_stage!==7);const cards=isStaff?'<div class="statrow">'+statuses.map(([key,name,color])=>'<div class="statbox" style="background:'+color+'"><span>'+name+'</span><b>'+new Set(activeCases.filter(c=>(c.participation_status||'rehab')===key).map(c=>c.player_id)).size+'名</b></div>').join('')+'</div>':'';const pending=cases.filter(c=>c.current_stage!==7&&!c.reviewed_at).sort((a,b)=>String(b.created_at||'').localeCompare(String(a.created_at||'')));const returned=cases.filter(c=>c.current_stage===7&&!c.return_reviewed_at).sort((a,b)=>String(b.returned_on||b.updated_at||'').localeCompare(String(a.returned_on||a.updated_at||'')));const notices=isStaff?'<div class="card"><h2>新規傷害報告 '+(pending.length?'（'+pending.length+'件）':'')+'</h2>'+(pending.length?pending.map(c=>'<button class="report-mini" onclick="window.surCase(&quot;'+c.id+'&quot;)"><b>'+esc(c.player_name)+'</b><span>'+esc(c.injury_category==='その他'?c.injury_other:c.injury_category)+'</span><span>'+esc(c.injured_on)+'</span><span>詳細を見る ›</span></button>').join(''):'<p class="muted">未確認の新規傷害報告はありません。</p>')+'</div><div class="card"><h2>復帰済み '+(returned.length?'（'+returned.length+'件）':'')+'</h2>'+(returned.length?returned.map(c=>'<button class="report-mini" onclick="window.surCase(&quot;'+c.id+'&quot;)"><b>'+esc(c.player_name)+'</b><span>'+esc(c.injury_category==='その他'?c.injury_other:c.injury_category)+'</span><span>'+esc(c.returned_on||'復帰日未登録')+'</span><span>詳細を見る ›</span></button>').join(''):'<p class="muted">未確認の復帰済み報告はありません。</p>')+'</div>':'<div class="card"><h1>リハビリテーション</h1><p>傷害報告の登録・確認は左メニューの「傷害報告」から行ってください。</p></div>';draw(nav()+cards+(isStaff?'<div class="card" id="sur-staff-alerts">確認事項を読み込み中…</div>'+notices:surRehabUI())+(isStaff&&profile.weekly_report_recipient?'<div class="card"><h2>週次レポート</h2><div id="sur_home_weekly">読み込み中…</div></div>':''));if(isStaff&&profile.weekly_report_recipient)window.surRenderHomeWeekly();if(!isStaff){window.surLoadAllDaily();window.surLoadHomeRadars()};if(isStaff)window.surLoadStaffAlerts()}
+function home(){if(profile?.is_hidden)return window.surHiddenHome();settingsExpanded=false;weeklyExpanded=false;permissionExpanded=false;view='home';const isStaff=profile.role!=='player';const statuses=[['rehab','リハビリ','#c63f49'],['partial','部分合流','#e28a26'],['observation','経過観察','#21966a']];const activeCases=cases.filter(c=>c.current_stage!==7);const cards=isStaff?'<div class="statrow">'+statuses.map(([key,name,color])=>'<div class="statbox" style="background:'+color+'"><span>'+name+'</span><b>'+new Set(activeCases.filter(c=>(c.participation_status||'rehab')===key).map(c=>c.player_id)).size+'名</b></div>').join('')+'</div>':'';const pending=cases.filter(c=>c.current_stage!==7&&!c.reviewed_at).sort((a,b)=>String(b.created_at||'').localeCompare(String(a.created_at||'')));const returned=cases.filter(c=>c.current_stage===7&&!c.return_reviewed_at).sort((a,b)=>String(b.returned_on||b.updated_at||'').localeCompare(String(a.returned_on||a.updated_at||'')));const notices=isStaff?'<div class="card"><h2>新規傷害報告 '+(pending.length?'（'+pending.length+'件）':'')+'</h2>'+(pending.length?pending.map(c=>'<button class="report-mini" onclick="window.surCase(&quot;'+c.id+'&quot;)"><b>'+esc(c.player_name)+'</b><span>'+esc(c.injury_category==='その他'?c.injury_other:c.injury_category)+'</span><span>'+esc(c.injured_on)+'</span><span>詳細を見る ›</span></button>').join(''):'<p class="muted">未確認の新規傷害報告はありません。</p>')+'</div><div class="card"><h2>復帰済み '+(returned.length?'（'+returned.length+'件）':'')+'</h2>'+(returned.length?returned.map(c=>'<button class="report-mini" onclick="window.surCase(&quot;'+c.id+'&quot;)"><b>'+esc(c.player_name)+'</b><span>'+esc(c.injury_category==='その他'?c.injury_other:c.injury_category)+'</span><span>'+esc(c.returned_on||'復帰日未登録')+'</span><span>詳細を見る ›</span></button>').join(''):'<p class="muted">未確認の復帰済み報告はありません。</p>')+'</div>':'<div class="card"><h1>リハビリテーション</h1><p>傷害報告の登録・確認は左メニューの「傷害報告」から行ってください。</p></div>';draw(nav()+cards+(isStaff?'<div class="card" id="sur-staff-alerts">確認事項を読み込み中…</div>'+notices:surRehabUI())+(isStaff&&profile.weekly_report_recipient?'<div class="card"><h2>週次レポート</h2><div id="sur_home_weekly">読み込み中…</div></div>':''));if(isStaff&&profile.weekly_report_recipient)window.surRenderHomeWeekly();if(!isStaff)surV2InitHome();if(isStaff)window.surLoadStaffAlerts()}
 function caseList(items){if(!items.length)return '<p class="muted">報告はありません。</p>';return `<div class="tbl"><table><thead><tr><th>選手</th><th>傷害名</th><th>受傷日</th><th>復帰予定日</th><th>Stage</th></tr></thead><tbody>${items.map(c=>`<tr class="pick" onclick="window.surCase('${c.id}')"><td>${esc(c.player_name)}</td><td>${esc(c.injury_category==='その他'?c.injury_other:c.injury_category)}</td><td>${esc(c.injured_on)}</td><td>${esc(c.target_return_on||'未定')}</td><td>${esc(stages[c.current_stage])}</td></tr>`).join('')}</tbody></table></div>`}
 let reportQuery='',reportSort='new';
 window.surReports=()=>{settingsExpanded=false;weeklyExpanded=false;permissionExpanded=false;view='reports';if(profile.role==='player'){const history=cases.filter(c=>c.player_id===user.id).sort((a,b)=>String(b.injured_on).localeCompare(String(a.injured_on)));draw(nav()+'<div class="card"><div class="line" style="justify-content:space-between"><h1>傷害報告の履歴</h1><button onclick="window.surNew()">＋ 傷害報告の新規登録</button></div><p class="muted">これまでに登録した傷害報告を確認できます。</p><label>傷害報告の検索</label><input id="sur-player-history-search" type="search" placeholder="傷害名・部位・受傷日・Stage" oninput="window.surFilterPlayerHistory(this.value)"><div id="sur-player-history-results">'+(history.length?history.map(c=>'<button class="report-mini" onclick="window.surCase(&quot;'+c.id+'&quot;)"><b>'+esc(c.injury_category==='その他'?c.injury_other:c.injury_category)+'</b><span>'+esc(c.body_part||'')+'</span><span>'+esc(c.injured_on||'')+'</span><span>'+(c.current_stage===7?'復帰済み':'Stage '+c.current_stage)+'　詳細 ›</span></button>').join(''):'<p>登録された傷害報告はありません。</p>')+'</div></div>');return;}const order=[['rehab','リハビリ','#c63f49'],['partial','部分合流','#e28a26'],['observation','経過観察','#21966a']];
