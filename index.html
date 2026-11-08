@@ -138,7 +138,111 @@
  .sur-v2footer>span{margin-left:0}
 }
 
-</style></head><body><header class="top"><div class="sur-header"><div class="sur-logo-holder"><img src="sur-logo-gold.svg?v=20261108" alt="SUR" class="sur-logo-image" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="sur-wordmark">SUR</div></div><div class="sur-header-copy"><div class="sur-expanded"><span class="sur-initial">S</span>tep <span class="sur-initial">U</span>p <span class="sur-initial">R</span>ehabilitation</div><div class="subtitle">筑陽学園高校サッカー部<br>リハビリサポートシステム</div></div></div><div id="sur-header-right" class="sur-header-right" style="display:none"></div><div id="sur-header-popover"></div></header><main id="app"><div class="card">接続しています…</div></main><script>
+
+/* SUR design alignment, 2026-11-08. All categories share blue/white/yellow cards. */
+:root{--sur-brand-blue:#003080;--sur-brand-deep:#082b54;--sur-brand-yellow:#F5CD00;--sur-brand-ink:#14365c;--sur-brand-light:#f3f8ff;--sur-brand-stroke:#d9e6f4}
+body{background:#eef4fb;color:var(--sur-brand-ink)}
+.top{background:var(--sur-brand-deep)!important}
+.sur-logo-holder .sur-wordmark{color:var(--sur-brand-yellow)!important}
+nav{background:var(--sur-brand-deep)!important}
+nav button.nav-active,nav .sur-subitem.nav-active{background:#1554a5!important;box-shadow:inset 4px 0 var(--sur-brand-yellow),0 2px 10px #00183a55!important}
+nav button:hover:not(.nav-active){background:#17447d!important}
+nav .sur-subnav{border-left-color:var(--sur-brand-yellow)!important}
+input[type="checkbox"],input[type="radio"],input[type="range"]{accent-color:var(--sur-brand-blue)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--sur-brand-yellow);outline-offset:2px}
+main:has(nav)>.card:not(.sur-v2home){border:1px solid var(--sur-brand-stroke);border-top:3px solid var(--sur-brand-yellow);border-radius:16px;box-shadow:0 6px 20px #00308010;background:#fff}
+main:has(nav)>.card:not(.sur-v2home)>h1,
+main:has(nav)>.card:not(.sur-v2home)>h2{background:linear-gradient(90deg,#f0f6ff,#fff);color:var(--sur-brand-blue);border-left:5px solid var(--sur-brand-yellow);padding:9px 12px;border-radius:5px 11px 11px 5px;margin-top:0}
+main .card h3,main .card h4{color:var(--sur-brand-blue)}
+main .card .report-mini{background:#f7faff;border:1px solid var(--sur-brand-stroke);color:var(--sur-brand-ink)}
+main .card .report-mini:hover{background:#fff9d8;border-color:#f0d36c}
+main .card .report-mini span:last-child{color:var(--sur-brand-blue)}
+main .card .staff-permission-item,main .card .sur-trainer-player{background:var(--sur-brand-light);border-color:var(--sur-brand-stroke)}
+main .card table th{background:#fff6cc;color:var(--sur-brand-blue)}
+main .card :is(.sur-guide-entry,.sur-ex-stage-section){border-color:var(--sur-brand-stroke);border-radius:12px}
+main .card :is(.sur-guide-entry,.sur-ex-stage-section)>summary{background:#fff6cc;color:var(--sur-brand-blue);padding:14px;border-radius:8px}
+main .card :is(.sur-guide-entry,.sur-ex-stage-section)>summary:hover{background:#ffec96}
+main .card details{border-color:var(--sur-brand-stroke)}
+main .card .sur-ex-category:has(input:checked){background:#fff8da;border-color:#efcc59}
+main .card .sur-menu-stage-purpose{background:#fff8dc;color:#204c7a}
+main .card .sur-menu-tabs button.sur-menu-tab-active{background:var(--sur-brand-blue)!important;border-color:var(--sur-brand-blue)!important;color:#fff!important;box-shadow:inset 0 -3px var(--sur-brand-yellow)!important}
+main .card .sur-chat-thread{background:#f4f8ff;border-color:var(--sur-brand-stroke)}
+main .card .sur-chat-players .sur-chat-selected{background:var(--sur-brand-blue);color:white;box-shadow:inset 4px 0 var(--sur-brand-yellow)}
+main .card .sur-chat-message.sur-chat-mine{background:#fff7d1;border-color:#f2dc83}
+main .card .sur-plan-actions{background:#f4f8ff;border-color:var(--sur-brand-stroke)}
+main .card .sur-ex-item{border-left:4px solid var(--sur-brand-yellow)}
+main .card .sur-plan-button-row>button:first-child:not(.secondary):not(.danger){background:var(--sur-brand-yellow);color:var(--sur-brand-deep);font-weight:800}
+.sur-v2stat-body{background:#fff7d3}
+.sur-v2seg button.active{background:linear-gradient(115deg,#003080,#1455a2)}
+.sur-v2action-row button,.sur-v2menu-button{background:var(--sur-brand-yellow);color:var(--sur-brand-deep)}
+.sur-v2health-summary-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.sur-v2health-edit{padding:7px 16px;font-size:12px;font-weight:800;border-radius:20px;background:#003080;color:white}
+.sur-v2health-edit:hover{background:#1653a5}
+@media(max-width:650px){
+ /* Native-app-like mobile composition: header above HOME, navigation docked below. */
+ html,body{min-width:0;overflow-x:hidden}
+ .top{position:fixed!important;top:0!important;left:0!important;width:100%!important;height:68px!important;padding:7px 12px!important;z-index:16!important;border-bottom:3px solid var(--sur-brand-yellow)!important}
+ .sur-header{flex-direction:row!important;gap:8px!important;justify-content:flex-start!important}
+ .sur-logo-holder{width:84px!important;flex:0 0 84px!important}
+ .sur-logo-image{width:84px!important;max-width:84px!important}
+ .sur-header-copy{gap:1px!important;max-width:calc(100% - 150px)!important}
+ .sur-expanded{font-size:10px!important}
+ .subtitle{font-size:8px!important}
+ main:has(nav){padding:0 9px!important;margin:76px auto 90px!important;max-width:100%!important;min-width:0!important}
+ nav.sur-player-mobile-nav{
+   position:fixed!important;top:auto!important;bottom:0!important;left:0!important;
+   width:100%!important;height:calc(64px + env(safe-area-inset-bottom,0px))!important;z-index:17!important;
+   display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;grid-template-rows:1fr!important;
+   align-items:stretch!important;gap:0!important;overflow:visible!important;
+   border-top:2px solid var(--sur-brand-yellow)!important;border-right:0!important;border-bottom:0!important;
+   background:#003080!important;box-shadow:0 -4px 18px #041b4360!important;
+   padding:5px 3px calc(5px + env(safe-area-inset-bottom,0px))!important;margin:0!important
+ }
+ nav.sur-player-mobile-nav>button{
+   display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important;
+   flex:initial!important;width:100%!important;min-width:0!important;min-height:50px!important;
+   padding:4px 1px!important;border-radius:8px!important;text-align:center!important;
+   font-size:9px!important;font-weight:750!important;line-height:1.2!important;white-space:nowrap!important;
+   background:transparent!important;color:#fff!important;border:0!important;box-shadow:none!important
+ }
+ nav.sur-player-mobile-nav>button>span{display:grid!important;place-items:center!important;min-height:22px!important;font-size:18px!important;line-height:1!important}
+ nav.sur-player-mobile-nav>button.nav-active{color:var(--sur-brand-yellow)!important;background:#114b9b!important;box-shadow:inset 0 3px var(--sur-brand-yellow)!important}
+ nav.sur-player-mobile-nav>button.nav-active>span{opacity:1!important}
+ nav.sur-player-mobile-nav .sur-count-badge{font-size:8px!important;margin:0!important;padding:0 4px!important;min-width:13px!important}
+ .sur-v2home{padding:10px!important;border:0!important;background:transparent!important;box-shadow:none!important;margin:0!important}
+ .sur-v2home-heading{padding:3px 2px 8px;margin:0 0 8px}
+ .sur-v2home-heading h1{font-size:20px}
+ .sur-v2home-heading>span{font-size:10px}
+ .sur-v2stats{gap:8px!important;margin-bottom:13px!important}
+ .sur-v2stat{border-radius:14px!important;border:1px solid #d8e3f1!important;box-shadow:0 3px 12px #0e30611b!important;padding:10px!important;background:#fff!important}
+ .sur-v2stat-label{font-size:10px!important;gap:4px!important;white-space:normal!important;line-height:1.3!important}
+ .sur-v2stat-label svg{width:18px!important;height:18px!important}
+ .sur-v2stat-body{background:#fff6c9!important;border-radius:9px!important;min-height:70px!important;justify-content:center!important;padding:7px 3px!important}
+ .sur-v2stat-body b{font-size:21px!important;font-weight:850!important}
+ .sur-v2stat-body.sur-v2countdown b{font-size:23px!important}
+ .sur-v2stat-body strong{font-size:11px!important}
+ .sur-v2stat-body.sur-v2countdown small{font-size:10px!important}
+ .sur-v2seg{background:#e7edf6!important;border-radius:28px!important;margin-bottom:12px!important;padding:3px!important}
+ .sur-v2seg button{border-radius:24px!important;font-size:12px!important;min-height:39px!important}
+ .sur-v2seg button.active{background:linear-gradient(110deg,#003080,#0c4a99)!important;color:white!important}
+ .sur-v2calendar-content{padding:10px 7px!important;border-radius:14px!important;border:1px solid #dce7f5!important;box-shadow:0 3px 12px #0d376116!important;background:white!important}
+ .sur-v2calendar-heading strong{font-size:13px!important}
+ .sur-v2day{min-height:72px!important}
+ .sur-v2month .sur-v2day{min-height:48px!important}
+ .sur-v2date{font-size:11px!important}
+ .sur-v2action-row,.sur-v2menu{background:#fff!important;border-radius:14px!important;box-shadow:0 3px 12px #0d376117!important}
+ .sur-v2action-row{margin:13px 0 11px!important}
+ .sur-v2action-row button,.sur-v2menu-button{background:var(--sur-brand-yellow)!important;color:#092a53!important;border-radius:22px!important}
+ .sur-v2menu{padding:12px!important;margin-bottom:12px!important}
+ .sur-v2menu-button{min-height:42px!important}
+ .sur-v2footer{background:#fff;border:1px solid #e1eaf5;border-radius:12px;padding:10px!important;gap:6px!important}
+ .sur-v2footer button{font-size:10px!important;padding:7px 6px!important}
+ .sur-v2footer>span{font-size:10px!important}
+ main:has(nav)>.card:not(.sur-v2home){padding:12px!important;border-radius:14px!important}
+ main:has(nav)>.card:not(.sur-v2home)>h1,main:has(nav)>.card:not(.sur-v2home)>h2{font-size:17px;padding:9px 10px}
+}
+
+</style></head><body><header class="top"><div class="sur-header"><div class="sur-logo-holder"><img src="sur-logo-gold.svg?v=20261108-chikuyo-f5cd00" alt="SUR" class="sur-logo-image" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="sur-wordmark">SUR</div></div><div class="sur-header-copy"><div class="sur-expanded"><span class="sur-initial">S</span>tep <span class="sur-initial">U</span>p <span class="sur-initial">R</span>ehabilitation</div><div class="subtitle">筑陽学園高校サッカー部<br>リハビリサポートシステム</div></div></div><div id="sur-header-right" class="sur-header-right" style="display:none"></div><div id="sur-header-popover"></div></header><main id="app"><div class="card">接続しています…</div></main><script>
 (function(){const header=document.querySelector('.top');if(!header)return;const sync=()=>document.documentElement.style.setProperty('--sur-header-height',header.getBoundingClientRect().height+'px');sync();window.addEventListener('resize',sync);if(typeof ResizeObserver!=='undefined')new ResizeObserver(sync).observe(header)})();
 window.surBootPhase='認証ライブラリの読み込み開始前';
 window.surWatchdog = setTimeout(() => {
@@ -427,8 +531,8 @@ function nav(){if(profile?.is_hidden)return '<nav class="no-print"><button class
  const item=(title,action,selected,count=0)=>'<button '+(title==='チャット'?'data-sur-chat-nav="1" ':'')+'class="'+(selected?'nav-active':'')+'" onclick="'+action+'"><span style="display:inline-block;width:24px;opacity:.95">'+(surNavIcons[title.replace(/ [▾▸].*$/,'')]||'•')+'</span>'+title+badge(count)+'</button>';
  const settingsSub=profile.role==='admin'?[['account','アカウント',0],['applications','申請',pendingCount]]:[['applications','申請',pendingCount]];
  const weeklySub=[['報告の登録','window.surWeekly()',0],['過去の報告','window.surWeeklyHistory()',0]];
- let menu='<nav class="no-print">'+item('HOME','window.surHome()',view==='home');
- if(profile.role==='player'){menu+=item('メニュー作成','window.surPlayerMenus()',view==='player-menus')+item('傷害報告','window.surReports()',view==='reports')+item('リハビリガイド','window.surGuide()',view==='guide')}else{menu+=item('傷害報告','window.surReports()',view==='reports')}
+ let menu='<nav class="no-print '+(profile.role==='player'?'sur-player-mobile-nav':'')+'">'+item('HOME','window.surHome()',view==='home');
+ if(profile.role==='player'){menu+=item('メニュー作成','window.surPlayerMenus()',view==='player-menus')+item('傷害報告','window.surReports()',view==='reports')}else{menu+=item('傷害報告','window.surReports()',view==='reports')}
  if(profile.role!=='player'){
    const rehabCurrent=rehabExpanded;
    menu+=item('リハビリ '+(rehabExpanded?'▾':'▸'),'window.surToggleRehab()',rehabCurrent);
@@ -442,7 +546,7 @@ function nav(){if(profile?.is_hidden)return '<nav class="no-print"><button class
    }
  }
  menu+=item('チャット','window.surChat()',view==='chat',surChatUnreadCount);
- if(profile.role==='player')menu+=item('設定','window.surPlayerProfile()',view==='my-account');
+ if(profile.role==='player')menu+=item('リハビリガイド','window.surGuide()',view==='guide')+item('設定','window.surPlayerProfile()',view==='my-account');
  if(profile.role!=='player'){
    const total=weeklySub.reduce((n,row)=>n+row[2],0);
    menu+=item('週次レポート '+(weeklyExpanded?'▾':'▸'),'window.surToggleWeekly()',weeklyExpanded,total);
@@ -686,9 +790,30 @@ function surSyncDailyHome(id,entry){
  if(button){button.disabled=false;button.textContent=saved?'本日の体調を見る ›':'体調を報告する ›';button.onclick=()=>surV2ToggleHealth(id)}
  if(summary){
   summary.hidden=true;
-  summary.innerHTML=saved?'<b>本日の体調</b><p>痛み NRS：'+esc(entry.pain)+'</p><p>腫れ：'+esc(entry.swelling||'未記録')+'</p><p>前回と比較：'+esc(entry.trend||'未記録')+'</p>':'';
+  summary.innerHTML=saved?'<div class="sur-v2health-summary-head"><b>本日の体調</b><button type="button" class="sur-v2health-edit" onclick="window.surV2EditHealth(&quot;'+esc(id)+'&quot;)">編集</button></div><p>痛み NRS：'+esc(entry.pain)+'</p><p>腫れ：'+esc(entry.swelling||'未記録')+'</p><p>前回と比較：'+esc(entry.trend||'未記録')+'</p>':'';
  }
 }
+
+function surV2EditHealth(id){
+ const stored=surV2DailyCache.get(id);
+ if(!stored?.entry||stored.day!==surDailyDay())return;
+ const entry=stored.entry;
+ const panel=document.getElementById('sur-daily-'+id);
+ const summary=document.getElementById('sur-today-check-summary-'+id);
+ if(!panel)return;
+ const pain=document.getElementById('pain_'+id);
+ const label=document.getElementById('score_'+id);
+ const swelling=document.getElementById('swell_'+id);
+ const trend=document.getElementById('trend_'+id);
+ if(pain)pain.value=String(entry.pain);
+ if(label)label.textContent=String(entry.pain);
+ if(swelling)swelling.value=entry.swelling||'なし';
+ if(trend)trend.value=entry.trend||'同じ';
+ if(summary)summary.hidden=true;
+ panel.hidden=false;
+ panel.scrollIntoView?.({behavior:'smooth',block:'nearest'});
+}
+window.surV2EditHealth=surV2EditHealth;
 
 function surV2ToggleHealth(id){
  const st=surV2DailyCache.get(id);
