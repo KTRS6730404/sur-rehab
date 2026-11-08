@@ -9,6 +9,21 @@
  main#app:not(:has(nav)){margin-top:18px!important;}
  main#app:has(nav){margin-top:12px!important;}
 }
+
+/* Player HOME: daily check first, compact Stage/return metrics, visible actions */
+.sur-player-home-card > .sur-daily-check-panel{margin:10px 0 16px}
+.sur-player-home-card .sur-home-overview{margin-top:8px}
+.sur-home-metrics>.sur-home-stage-card{margin:0!important;padding:11px 14px!important;gap:6px!important;border:1px solid var(--stage-border,#bbcee0)!important;border-left:5px solid var(--stage-color,#1f497d)!important;background:var(--stage-tint,#eef4fa)!important;border-radius:10px}
+.sur-home-metrics>.sur-home-stage-card .sur-stage-label{display:block;font-size:12px}
+.sur-home-metrics>.sur-home-stage-card b{display:block;font-size:16px!important;line-height:1.45;overflow-wrap:anywhere}
+.sur-previous-menu-btn.sur-home-action{display:block;width:100%;margin-top:9px;padding:8px 9px;border:0;border-radius:8px;background:#dceafa;color:#155280;text-align:left;font-size:12px;font-weight:700;white-space:normal;cursor:pointer}
+.sur-previous-menu-btn.sur-home-action:hover{background:#cce2f9;filter:none}
+.sur-home-return-card>span{display:block}
+.sur-home-return-card>span small{display:inline;font-size:12px;margin-left:6px;color:#607589;font-weight:500}
+.sur-home-metrics .sur-return-countdown{display:block;width:100%;margin-top:9px;padding:8px 9px;border-radius:8px;background:#dceafa;color:#155280;font-size:20px!important;font-weight:800;line-height:1.4;text-align:left}
+.sur-home-prev-menu{background:#f5f9fe;border:1px solid #d9e7f3;border-radius:10px;padding:12px 14px;margin:0 0 16px}
+.sur-home-prev-menu[hidden]{display:none}
+@media(max-width:720px){.sur-player-home-card .sur-home-overview{gap:12px}.sur-home-metrics>.sur-home-stage-card b{font-size:15px!important}}
 </style></head><body><header class="top"><div class="sur-header"><div class="sur-logo-holder"><img src="sur-logo-gold.svg?v=20261108" alt="SUR" class="sur-logo-image" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="sur-wordmark">SUR</div></div><div class="sur-header-copy"><div class="sur-expanded"><span class="sur-initial">S</span>tep <span class="sur-initial">U</span>p <span class="sur-initial">R</span>ehabilitation</div><div class="subtitle">筑陽学園高校サッカー部<br>リハビリサポートシステム</div></div></div><div id="sur-header-right" class="sur-header-right" style="display:none"></div><div id="sur-header-popover"></div></header><main id="app"><div class="card">接続しています…</div></main><script>
 (function(){const header=document.querySelector('.top');if(!header)return;const sync=()=>document.documentElement.style.setProperty('--sur-header-height',header.getBoundingClientRect().height+'px');sync();window.addEventListener('resize',sync);if(typeof ResizeObserver!=='undefined')new ResizeObserver(sync).observe(header)})();
 window.surBootPhase='認証ライブラリの読み込み開始前';
@@ -334,7 +349,47 @@ function surPlayerHome(){
 function surRehabUI(){
  const list=cases.filter(c=>c.player_id===user.id&&c.current_stage!==7);
  if(!list.length)return '<div class="card"><h2>今日のリハビリ</h2><p>現在実施中の傷害報告はありません。</p><button onclick="window.surNew()">＋ 傷害報告を登録</button></div>';
- return list.map(c=>'<div class="card"><h2>今日のリハビリ｜'+esc(c.injury_category)+'</h2><div class="sur-stage-card sur-stage-'+Math.max(0,Math.min(7,Number(c.current_stage)||0))+'"><div class="sur-stage-layout"><div class="sur-stage-text"><span class="sur-stage-label">現在のリハビリStage</span><b>Stage '+c.current_stage+'：'+esc(stages[c.current_stage])+'</b></div><button class="sur-previous-menu-btn" type="button" onclick="window.surPreviousMenu(&quot;'+c.id+'&quot;)">前回のメニューを確認する</button></div><div id="sur-prev-menu-'+c.id+'" class="sur-prev-menu" hidden></div></div><div class="sur-home-overview"><div class="sur-player-metrics sur-home-metrics"><div class="'+(surDays(c.injured_on,today())!==null&&surDays(c.injured_on,today())>=0&&surDays(c.injured_on,today())<=2?'sur-early-injury':'')+'"><span>受傷から</span><b>'+Math.max(0,surDays(c.injured_on,today())||0)+'日</b>'+(surDays(c.injured_on,today())!==null&&surDays(c.injured_on,today())>=0&&surDays(c.injured_on,today())<=2?'<p class="sur-early-message">受傷直後の3日間は、患部を保護し、必要に応じて短時間の冷却と適度な圧迫を繰り返しましょう。冷やしすぎ・締めすぎに注意し、医師・スタッフの指示を優先してください。</p>':'')+'<button class="sur-home-detail-link" onclick="window.surCase(&quot;'+c.id+'&quot;)">傷害報告の詳細を見る ›</button></div><div><span>復帰目標日</span><b>'+esc(c.target_return_on||'未設定')+'</b></div><div><span>復帰まで</span><b>'+((surDays(today(),c.target_return_on)??null)===null?'未設定':(surDays(today(),c.target_return_on)>0?'あと'+surDays(today(),c.target_return_on)+'日':surDays(today(),c.target_return_on)===0?'今日':'超過'))+'</b></div></div><div class="sur-home-radar" id="sur-home-radar-'+c.id+'"><h3>体力要素の到達状況</h3><p class="muted">評価を読み込み中…</p></div></div><div id="sur-daily-'+c.id+'" class="sur-daily-check-panel"><h3>今日の体調（30秒）</h3><div class="sur-daily-check-grid"><div class="sur-daily-check-item"><label>痛み NRS <span id="score_'+c.id+'">2</span></label><input type="range" id="pain_'+c.id+'" min="0" max="10" value="2" oninput="document.getElementById(&quot;score_'+c.id+'&quot;).textContent=this.value"></div><div class="sur-daily-check-item"><label>腫れ</label><select id="swell_'+c.id+'"><option>なし</option><option>少し</option><option>強い</option></select></div><div class="sur-daily-check-item"><label>前回と比較</label><select id="trend_'+c.id+'"><option>良い</option><option selected>同じ</option><option>悪い</option></select></div></div><button class="sur-daily-save" onclick="window.surSaveDaily(&quot;'+c.id+'&quot;)">体調を保存</button></div><div class="sur-pain-change-card"><h3>痛みの変化</h3><div id="daily-progress-'+c.id+'">読み込み中…</div></div></div>').join('');
+ return list.map(c=>{
+   const id=esc(c.id), injuryDays=surDays(c.injured_on,today());
+   const early=injuryDays!==null&&injuryDays>=0&&injuryDays<=2;
+   const remain=c.target_return_on?surDays(today(),c.target_return_on):null;
+   const countdown=remain===null?'未設定':remain>0?'あと'+remain+'日':remain===0?'今日が目標日':Math.abs(remain)+'日超過';
+   const stage=Math.max(0,Math.min(6,Number(c.current_stage)||0));
+   return `
+<div class="card sur-player-home-card">
+  <h2>今日のリハビリ｜${esc(c.injury_category)}</h2>
+  <div id="sur-daily-${id}" class="sur-daily-check-panel">
+    <h3>今日の体調（30秒）</h3>
+    <div class="sur-daily-check-grid">
+      <div class="sur-daily-check-item"><label>痛み NRS <span id="score_${id}">2</span></label><input type="range" id="pain_${id}" min="0" max="10" value="2" oninput="document.getElementById('score_${id}').textContent=this.value"></div>
+      <div class="sur-daily-check-item"><label>腫れ</label><select id="swell_${id}"><option>なし</option><option>少し</option><option>強い</option></select></div>
+      <div class="sur-daily-check-item"><label>前回と比較</label><select id="trend_${id}"><option>良い</option><option selected>同じ</option><option>悪い</option></select></div>
+    </div>
+    <button class="sur-daily-save" onclick="window.surSaveDaily(&quot;${id}&quot;)">体調を保存</button>
+  </div>
+  <div class="sur-home-overview">
+    <div class="sur-player-metrics sur-home-metrics">
+      <div class="${early?'sur-early-injury':''}">
+        <span>受傷から</span><b>${injuryDays===null?'—':Math.max(0,injuryDays)+'日'}</b>
+        ${early?'<p class="sur-early-message">受傷直後の3日間は、患部を保護し、必要に応じて短時間の冷却と適度な圧迫を繰り返しましょう。冷やしすぎ・締めすぎに注意し、医師・スタッフの指示を優先してください。</p>':''}
+        <button class="sur-home-detail-link" onclick="window.surCase(&quot;${id}&quot;)">傷害報告の詳細を見る ›</button>
+      </div>
+      <div class="sur-stage-card sur-home-stage-card sur-stage-${stage}">
+        <span class="sur-stage-label">現在のリハビリStage</span>
+        <b>Stage ${stage}：${esc(stages[stage]||'')}</b>
+        <button class="sur-previous-menu-btn sur-home-action" type="button" onclick="window.surPreviousMenu(&quot;${id}&quot;)">前回のメニューを見る ›</button>
+      </div>
+      <div class="sur-home-return-card">
+        <span>復帰目標日 <small>${esc(c.target_return_on||'未設定')}</small></span>
+        <b class="sur-return-countdown">${esc(countdown)}</b>
+      </div>
+    </div>
+    <div class="sur-home-radar" id="sur-home-radar-${id}"><h3>体力要素の到達状況</h3><p class="muted">評価を読み込み中…</p></div>
+  </div>
+  <div id="sur-prev-menu-${id}" class="sur-prev-menu sur-home-prev-menu" hidden></div>
+  <div class="sur-pain-change-card"><h3>痛みの変化</h3><div id="daily-progress-${id}">読み込み中…</div></div>
+</div>`;
+ }).join('');
 }
 window.surLoadHomeRadars=async()=>{if(!user||profile?.role!=='player')return;const targets=cases.filter(c=>c.player_id===user.id&&c.current_stage!==7);await Promise.all(targets.map(async c=>{const host=document.getElementById('sur-home-radar-'+c.id);if(!host)return;const r=await sb.from('sur_fitness_assessments').select('category,element,status,created_at').eq('case_id',c.id).order('created_at',{ascending:false}).limit(100);if(!host.isConnected)return;if(r.error){host.innerHTML='<h3>体力要素の到達状況</h3><p class="muted">評価を取得できませんでした。</p><button type="button" class="sur-radar-menu-btn" onclick="window.surPlayerMenus()">リハビリメニューを見る ›</button>';return}const ratings=[...new Map((r.data||[]).reverse().map(x=>[x.category+'-'+x.element,x])).values()];host.innerHTML='<h3>体力要素の到達状況</h3>'+surFitnessRadar(ratings)+'<button type="button" class="sur-radar-menu-btn" onclick="window.surPlayerMenus()">リハビリメニューを見る ›</button>'}))};
 window.surSaveDaily=async id=>{const row={case_id:id,player_id:user.id,day:today(),pain:Number(get('pain_'+id)),swelling:get('swell_'+id),trend:get('trend_'+id)};const r=await sb.from('sur_daily_checks').upsert(row,{onConflict:'case_id,day'});if(r.error)return err(r.error);const loaded=await window.surLoadDaily(id);if(loaded){const menu=document.getElementById('daily-menu-'+id);menu?.scrollIntoView({behavior:'smooth',block:'start'});msg('体調報告を保存しました。本日のリハビリメニューをご確認ください。')}else msg('体調報告は保存しましたが、メニューの取得に失敗しました。再読み込みして確認してください。')};
