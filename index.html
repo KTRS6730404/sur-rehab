@@ -683,7 +683,7 @@ function surSyncDailyHome(id,entry){
  const saved=!!entry;
  if(panel)panel.hidden=true;
  if(status)status.textContent=saved?'報告済み':'未入力';
- if(button){button.disabled=false;button.textContent=saved?'本日の体調を見る ›':'体調を報告する ›'}
+ if(button){button.disabled=false;button.textContent=saved?'本日の体調を見る ›':'体調を報告する ›';button.onclick=()=>surV2ToggleHealth(id)}
  if(summary){
   summary.hidden=true;
   summary.innerHTML=saved?'<b>本日の体調</b><p>痛み NRS：'+esc(entry.pain)+'</p><p>腫れ：'+esc(entry.swelling||'未記録')+'</p><p>前回と比較：'+esc(entry.trend||'未記録')+'</p>':'';
