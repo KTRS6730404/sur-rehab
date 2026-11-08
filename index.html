@@ -188,7 +188,7 @@ main .card .sur-plan-button-row>button:first-child:not(.secondary):not(.danger){
  .sur-header-copy{gap:1px!important;max-width:calc(100% - 150px)!important}
  .sur-expanded{font-size:10px!important}
  .subtitle{font-size:8px!important}
- main:has(nav){padding:0 9px!important;margin:76px auto 90px!important;max-width:100%!important;min-width:0!important}
+ main#app:has(nav.sur-player-mobile-nav){padding:0 9px!important;margin:76px auto calc(90px + env(safe-area-inset-bottom,0px))!important;max-width:100%!important;min-width:0!important}
  nav.sur-player-mobile-nav{
    position:fixed!important;top:auto!important;bottom:0!important;left:0!important;
    width:100%!important;height:calc(64px + env(safe-area-inset-bottom,0px))!important;z-index:17!important;
@@ -202,7 +202,7 @@ main .card .sur-plan-button-row>button:first-child:not(.secondary):not(.danger){
    display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important;
    flex:initial!important;width:100%!important;min-width:0!important;min-height:50px!important;
    padding:4px 1px!important;border-radius:8px!important;text-align:center!important;
-   font-size:9px!important;font-weight:750!important;line-height:1.2!important;white-space:nowrap!important;
+   font-size:9px!important;font-weight:750!important;line-height:1.1!important;white-space:normal!important;word-break:break-all!important;
    background:transparent!important;color:#fff!important;border:0!important;box-shadow:none!important
  }
  nav.sur-player-mobile-nav>button>span{display:grid!important;place-items:center!important;min-height:22px!important;font-size:18px!important;line-height:1!important}
