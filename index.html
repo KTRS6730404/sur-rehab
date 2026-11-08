@@ -245,6 +245,155 @@ main .card .sur-plan-button-row>button:first-child:not(.secondary):not(.danger){
  main:has(nav)>.card:not(.sur-v2home)>h1,main:has(nav)>.card:not(.sur-v2home)>h2{font-size:17px;padding:9px 10px}
 }
 
+
+/* SUR Staff HOME Proposal 01: blue/yellow/white summary, priority queue and team calendar */
+.sur-staff-home{--staff-blue:#003080;--staff-blue-deep:#082c5e;--staff-yellow:#F5CD00;--staff-border:#d8e5f4;--staff-muted:#60768f;--staff-bg:#f5f9fe;max-width:100%;padding-bottom:18px}
+.sur-staff-home [hidden]{display:none!important}
+.sur-staff-page-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 16px;padding:2px 0 1px}
+.sur-staff-page-title h1{color:#15273f;margin:0;display:flex;align-items:center;gap:9px;font-size:25px;line-height:1.3}
+.sur-staff-page-title h1:before{content:"";width:8px;height:28px;background:var(--staff-yellow);border-radius:4px;display:block;transform:skew(-17deg)}
+.sur-staff-page-title>span{font-size:12px;font-weight:650;color:var(--staff-muted)}
+.sur-staff-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 16px}
+.sur-staff-summary-card{display:flex;align-items:center;gap:11px;background:#fff;color:#172a45;text-align:left;min-width:0;min-height:109px;padding:14px 12px;border:1px solid #dfe9f4;border-radius:14px;box-shadow:0 4px 13px #05346b13}
+.sur-staff-summary-card:hover{background:#fffbe9;border-color:#ebd370;transform:translateY(-1px)}
+.sur-staff-summary-icon{width:57px;height:57px;flex:0 0 57px;display:grid;place-items:center;border-radius:12px;background:#e7f0ff;color:#0953a5}
+.sur-staff-summary-partial,.sur-staff-summary-week{background:#fff4ca;color:#c59c00}
+.sur-staff-summary-copy{display:flex;flex:1;flex-direction:column;min-width:0;gap:6px}
+.sur-staff-summary-copy>span{font-size:13px;font-weight:800;white-space:nowrap}
+.sur-staff-summary-copy>b{font-size:32px;line-height:1;font-weight:900;color:#111c30;font-variant-numeric:tabular-nums}
+.sur-staff-summary-copy>b small{font-size:13px;font-weight:800;margin-left:3px}
+.sur-staff-summary-arrow{flex:0 0 auto;color:#54799f}
+.sur-staff-status-details{background:#fff;border:1px solid #e4d07c;border-radius:13px;margin:-3px 0 16px;padding:12px 14px;box-shadow:0 4px 14px #143b5a12}
+.sur-staff-detail-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;gap:8px}
+.sur-staff-detail-title b{color:var(--staff-blue)}
+.sur-staff-detail-title button{padding:6px 11px;font-size:11px}
+.sur-staff-person{display:flex;align-items:center;gap:10px;padding:10px 9px;background:#f7faff;color:#12345b;border-radius:8px;margin:5px 0;width:100%;text-align:left;border:1px solid #e2ecf6}
+.sur-staff-person:hover{background:#fff7d3}
+.sur-staff-person span{flex:1;color:#5b718a;font-size:12px}
+.sur-staff-section.card{border:1px solid var(--staff-border)!important;border-radius:16px!important;box-shadow:0 5px 17px #073d6b12!important;padding:17px 19px 20px!important;background:white!important;margin:0 0 17px}
+.sur-staff-section-header{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:2px solid #e9eef6;padding:0 0 11px;margin:0 0 12px;position:relative}
+.sur-staff-section-header:after{content:"";position:absolute;bottom:-2px;left:0;width:145px;height:4px;border-radius:3px;background:var(--staff-yellow)}
+.sur-staff-section-header h2{margin:0!important;padding:0!important;border:0!important;background:none!important;color:#152743!important;font-size:19px;display:flex;align-items:center;gap:9px;line-height:1.4}
+.sur-staff-section-header h2 svg{color:#074d9d}
+.sur-staff-section-header>span{color:var(--staff-blue);font-size:12px;font-weight:750}
+.sur-staff-section-rule{font-size:12px;color:var(--staff-muted);margin:0 0 10px}
+.sur-staff-action-item{background:#fff;border:1px solid #e0e8f2;border-radius:10px;margin:7px 0;overflow:hidden;position:relative}
+.sur-staff-action-item:before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:#4e9fea}
+.sur-staff-priority-danger{background:#fff5f5;border-color:#f4d8d9}
+.sur-staff-priority-danger:before{background:#f56b78}
+.sur-staff-priority-warning{background:#fffaf0;border-color:#eee1bf}
+.sur-staff-priority-warning:before{background:#f4ca12}
+.sur-staff-priority-info{background:#f5faff;border-color:#dceafa}
+.sur-staff-action-main{display:grid;grid-template-columns:minmax(105px,1.2fr) minmax(140px,1.35fr) minmax(80px,.9fr) minmax(170px,2fr) auto;gap:10px;align-items:center;padding:10px 11px 10px 16px}
+.sur-staff-action-main>strong{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sur-staff-action-main>strong small{font-size:11px;color:#65758a;font-weight:650}
+.sur-staff-action-injury{font-size:12px;line-height:1.4;color:#284364}
+.sur-staff-action-tag{border-radius:999px;padding:5px 8px;white-space:nowrap;text-align:center;font-size:11px;font-weight:850;background:#e7f2ff;color:#215b9a}
+.sur-staff-priority-danger .sur-staff-action-tag{background:#f6dce0;color:#b92e43}
+.sur-staff-priority-warning .sur-staff-action-tag{background:#fff0a9;color:#7f6100}
+.sur-staff-action-reason{font-size:12px;line-height:1.45;color:#41566c;overflow-wrap:anywhere}
+.sur-staff-action-buttons{display:flex;gap:5px;justify-content:flex-end;flex-wrap:wrap}
+.sur-staff-action-buttons>button{display:inline-flex;align-items:center;justify-content:center;gap:4px;font-size:11px;font-weight:750;border-radius:8px;padding:7px 9px;white-space:nowrap}
+.sur-staff-action-buttons .sur-staff-outline{background:white;border:1px solid #0c4b9a;color:#0c4b9a}
+.sur-staff-action-buttons .sur-staff-chat{background:#064394;color:white}
+.sur-staff-action-buttons .sur-staff-resolve{background:#f4cd00;color:#062b56}
+.sur-staff-show-more{margin-top:10px;width:100%;background:#eef4fd;color:#003080;font-weight:800;border:1px solid #d9e5f5;border-radius:9px}
+.sur-staff-empty{display:flex;align-items:center;gap:8px;color:#167445;background:#ecf8f1;padding:16px;border-radius:10px;font-weight:750;font-size:13px}
+.sur-staff-calendar-heading{flex-wrap:wrap}
+.sur-staff-seg{display:flex;align-items:center;background:#e6edf7;border-radius:10px;padding:3px;gap:0}
+.sur-staff-seg button{padding:8px 18px;background:transparent;border-radius:8px;color:#304d70;font-size:12px;font-weight:800}
+.sur-staff-seg button.active{background:var(--staff-blue);color:white}
+.sur-staff-calendar-grid{display:grid;grid-template-columns:minmax(0,2.3fr) minmax(260px,1fr);gap:13px}
+.sur-staff-calendar-main{min-width:0}
+.sur-staff-calendar-controls{display:flex;align-items:center;gap:9px;margin-bottom:11px;justify-content:space-between}
+.sur-staff-calendar-controls>b{flex:1;text-align:center;color:#164078;font-size:15px}
+.sur-staff-c-arrow{width:33px;height:33px;display:grid;place-items:center;padding:5px;background:#eef5fd;border:1px solid #dfe8f2;border-radius:9px;color:#084792}
+.sur-staff-today{background:#fff2ac;border:1px solid #edcf69;color:#05396e;font-weight:850;font-size:11px;padding:8px 11px}
+.sur-staff-calendar-scroll{overflow-x:auto;border-radius:10px;border:1px solid #d5dfed}
+.sur-staff-week-table{width:100%;min-width:480px;border-collapse:separate;border-spacing:0;font-size:12px}
+.sur-staff-week-table th,.sur-staff-week-table td{padding:0;text-align:center;border-bottom:1px solid #dce5f0;border-right:1px solid #e2e9f2}
+.sur-staff-week-table th:first-child{min-width:99px;width:110px;text-align:left;background:#f4f8fd;font-weight:750;padding-left:8px;color:#264768;white-space:nowrap}
+.sur-staff-week-table thead th{background:#eff5fb}
+.sur-staff-week-table thead th:first-child{font-size:11px}
+.sur-staff-calday{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 2px;width:100%;background:transparent;color:#17467a;border-radius:0;font-size:11px}
+.sur-staff-calday b{font-size:13px}
+.sur-staff-calday.sur-staff-selected-day{background:#fff2a1;color:#073e7c;box-shadow:inset 0 0 0 2px #d2a600}
+.sur-staff-calday.sur-staff-today-day:not(.sur-staff-selected-day){background:#fffbe6}
+.sur-staff-week-table td button{padding:10px 2px;width:100%;min-height:40px;background:#fff;color:#24496e;border-radius:0;font-weight:800}
+.sur-staff-week-table td button.selected{background:#fff7c8;color:#003080}
+.sur-staff-week-table td button:hover{background:#f1f6ff}
+.sur-staff-color-dot{display:inline-block;width:9px;height:9px;flex:0 0 9px;border-radius:50%;vertical-align:middle;margin:0 5px 1px 0;background:#637b9c}
+.sur-staff-dot-report{background:#1984ea}
+.sur-staff-dot-urgent{background:#ed4f5d}
+.sur-staff-dot-return{background:#36a64a}
+.sur-staff-dot-missing{background:#939daa}
+.sur-staff-calendar-note{color:#647991;font-size:10px;margin:10px 0 0;line-height:1.8}
+.sur-staff-weekday-labels{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;text-align:center;color:#596f89;font-size:11px;font-weight:750;margin-bottom:4px}
+.sur-staff-month-cells{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.sur-staff-month-day{display:flex;flex-direction:column;align-items:center;gap:5px;min-height:58px;padding:5px 0;background:#f7faff;color:#1d3c5e;border:1px solid #e1ebf5;border-radius:9px}
+.sur-staff-month-day>b{font-size:12px}
+.sur-staff-month-day.sur-staff-selected-day{background:#fff2a6;border:2px solid #d4ac10}
+.sur-staff-month-day.sur-staff-today-day:not(.sur-staff-selected-day){background:#fff8d8}
+.sur-staff-outside-month{opacity:.36}
+.sur-staff-month-markers{display:flex;gap:2px;justify-content:center;flex-wrap:wrap}
+.sur-staff-month-markers i{display:grid;place-items:center;min-width:15px;height:15px;padding:0 2px;border-radius:4px;font-style:normal;font-size:10px;font-weight:850;color:#fff}
+.sur-staff-mini-report{background:#1984ea}
+.sur-staff-mini-urgency{background:#ed4f5d}
+.sur-staff-mini-returns{background:#36a64a}
+.sur-staff-day-detail{border:1px solid #dee7f1;border-radius:12px;background:#fbfdff;min-width:0;align-self:stretch}
+.sur-staff-selected-title{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:12px 13px;background:#fff4bd;border-radius:11px 11px 0 0;color:#183d6f}
+.sur-staff-selected-title b{font-size:13px}
+.sur-staff-selected-title span{font-size:11px;font-weight:850}
+.sur-staff-selected-event{border-bottom:1px solid #e1e8f1;padding:10px 12px}
+.sur-staff-selected-event>div:first-child{display:flex;align-items:center;gap:4px;font-size:11px}
+.sur-staff-selected-event>div:first-child b{flex:1;font-weight:750}
+.sur-staff-selected-event>div:first-child strong{font-size:12px;color:#0b3779;white-space:nowrap}
+.sur-staff-selected-names{display:flex;flex-direction:column;gap:4px;margin:7px 0 0;padding-left:12px}
+.sur-staff-selected-names button{padding:4px 0;text-align:left;background:transparent;color:#315b87;font-size:11px;line-height:1.5}
+.sur-staff-selected-names button:hover{color:#0c4c9a;text-decoration:underline}
+.sur-staff-selected-names span{font-size:11px;color:#77879a}
+.sur-staff-footnote{font-size:10px;line-height:1.5;color:#7d8fa3;margin:10px 12px}
+.sur-staff-weekly-details{margin:10px 0;padding:12px 16px;border-top:3px solid #f5cd00!important}
+.sur-staff-weekly-details summary{color:#003080;font-weight:850}
+@media(max-width:1230px){
+ .sur-staff-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .sur-staff-action-main{grid-template-columns:minmax(90px,1fr) minmax(110px,1fr) auto;gap:7px}
+ .sur-staff-action-reason{grid-column:1/3;grid-row:2}
+ .sur-staff-action-buttons{grid-column:3;grid-row:1/3;align-self:center}
+ .sur-staff-calendar-grid{grid-template-columns:minmax(0,1fr)}
+ .sur-staff-day-detail{margin-top:0}
+}
+@media(max-width:730px){
+ .sur-staff-page-title h1{font-size:20px}
+ .sur-staff-summary{gap:8px}
+ .sur-staff-summary-card{min-height:90px;padding:10px;gap:7px}
+ .sur-staff-summary-icon{width:41px;height:44px;flex-basis:41px}
+ .sur-staff-summary-icon svg{width:21px;height:21px}
+ .sur-staff-summary-copy>span{font-size:11px;white-space:normal;line-height:1.2}
+ .sur-staff-summary-copy>b{font-size:25px}
+ .sur-staff-summary-copy>b small{font-size:11px}
+ .sur-staff-summary-arrow{display:none}
+ .sur-staff-section.card{padding:13px!important}
+ .sur-staff-section-header h2{font-size:16px}
+ .sur-staff-action-main{grid-template-columns:minmax(0,1fr) auto;gap:5px 9px}
+ .sur-staff-action-main>strong{grid-column:1;grid-row:1;font-size:13px}
+ .sur-staff-action-tag{grid-column:2;grid-row:1}
+ .sur-staff-action-injury{grid-column:1/3;grid-row:2}
+ .sur-staff-action-reason{grid-column:1/3;grid-row:3}
+ .sur-staff-action-buttons{grid-column:1/3;grid-row:4;justify-content:flex-start;margin-top:5px}
+ .sur-staff-calendar-controls>b{font-size:13px}
+ .sur-staff-calendar-scroll{max-width:100%}
+ .sur-staff-calendar-note{font-size:9px}
+}
+@media(max-width:650px){
+ main#app:has(nav:not(.sur-player-mobile-nav)){margin:73px auto 24px!important;padding:0 9px!important;max-width:100%!important}
+ nav.no-print:not(.sur-player-mobile-nav){position:sticky!important;top:68px!important;left:auto!important;bottom:auto!important;width:100%!important;height:auto!important;display:flex!important;flex-wrap:nowrap!important;flex-direction:row!important;overflow-x:auto!important;overflow-y:hidden!important;gap:4px!important;white-space:nowrap!important;margin:0 0 11px!important;padding:7px 4px!important;z-index:12!important;border-right:0!important;border-bottom:2px solid #f5cd00!important}
+ nav.no-print:not(.sur-player-mobile-nav)>button{width:auto!important;flex:0 0 auto!important;padding:8px 9px!important;min-height:40px!important;font-size:11px!important}
+ nav.no-print:not(.sur-player-mobile-nav) .sur-subnav{flex:0 0 auto!important;flex-direction:row!important;align-items:center!important;gap:3px!important;margin:0!important;padding:0 3px!important}
+ nav.no-print:not(.sur-player-mobile-nav) .sur-subitem{font-size:10px!important;white-space:nowrap!important}
+ .sur-staff-page-title{margin-top:5px}
+}
+
 </style></head><body><header class="top"><div class="sur-header"><div class="sur-logo-holder"><img src="sur-logo-gold.svg?v=20261108-chikuyo-f5cd00" alt="SUR" class="sur-logo-image" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="sur-wordmark">SUR</div></div><div class="sur-header-copy"><div class="sur-expanded"><span class="sur-initial">S</span>tep <span class="sur-initial">U</span>p <span class="sur-initial">R</span>ehabilitation</div><div class="subtitle">筑陽学園高校サッカー部<br>リハビリサポートシステム</div></div></div><div id="sur-header-right" class="sur-header-right" style="display:none"></div><div id="sur-header-popover"></div></header><main id="app"><div class="card">接続しています…</div></main><script>
 (function(){const header=document.querySelector('.top');if(!header)return;const sync=()=>document.documentElement.style.setProperty('--sur-header-height',header.getBoundingClientRect().height+'px');sync();window.addEventListener('resize',sync);if(typeof ResizeObserver!=='undefined')new ResizeObserver(sync).observe(header)})();
 window.surBootPhase='認証ライブラリの読み込み開始前';
