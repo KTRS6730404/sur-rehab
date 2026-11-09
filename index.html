@@ -411,6 +411,14 @@ nav.no-print:not(.sur-player-mobile-nav) .sur-subitem.nav-active svg{stroke:#003
 .sur-chat-message .sur-chat-to{display:inline-block;padding:2px 7px;margin-left:3px;background:#edf3ff;color:#1c5aa2;border-radius:20px;font-size:10px;font-weight:750}
 .sur-chat-message.sur-chat-mine .sur-chat-to{background:#fff4b9;color:#795c00}
 @media(max-width:650px){.sur-chat-recipient-box{padding:10px}.sur-chat-recipient-box select{max-width:100%}}
+
+/* Mobile header: hide the long caption to protect logo and account controls. */
+@media(max-width:650px){
+ .top .sur-header-copy{display:none!important}
+ .top .sur-header{flex:0 0 auto!important;min-width:0!important}
+ .top .sur-logo-holder{flex:0 0 84px!important;width:84px!important}
+ .top .sur-header-right{margin-left:auto!important;min-width:0!important;max-width:calc(100% - 96px)!important}
+}
 </style></head><body><header class="top"><div class="sur-header"><div class="sur-logo-holder"><img src="sur-logo-gold.svg?v=20261108-chikuyo-f5cd00" alt="SUR" class="sur-logo-image" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="sur-wordmark">SUR</div></div><div class="sur-header-copy"><div class="sur-expanded"><span class="sur-initial">S</span>tep <span class="sur-initial">U</span>p <span class="sur-initial">R</span>ehabilitation</div><div class="subtitle">筑陽学園高校サッカー部<br>リハビリサポートシステム</div></div></div><div id="sur-header-right" class="sur-header-right" style="display:none"></div><div id="sur-header-popover"></div></header><main id="app"><div class="card">接続しています…</div></main><script>
 (function(){const header=document.querySelector('.top');if(!header)return;const sync=()=>document.documentElement.style.setProperty('--sur-header-height',header.getBoundingClientRect().height+'px');sync();window.addEventListener('resize',sync);if(typeof ResizeObserver!=='undefined')new ResizeObserver(sync).observe(header)})();
 window.surBootPhase='認証ライブラリの読み込み開始前';
