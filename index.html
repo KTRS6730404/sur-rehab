@@ -611,6 +611,17 @@ nav.no-print:not(.sur-player-mobile-nav)>button>span:first-child svg{display:blo
 @media(max-width:650px){
  .sur-v2home .sur-v2stat.sur-v2-stage-card{padding-top:7px!important}
 }
+
+/* Player HOME: previous-menu action uses the same Chikuyo yellow as primary buttons. */
+.sur-v2home .sur-v2footer button.sur-v2previous{
+ background:#F5CD00!important;color:#082b54!important;
+ border:1px solid #e6bd00!important;font-weight:850!important;
+}
+.sur-v2home .sur-v2footer button.sur-v2previous:hover,
+.sur-v2home .sur-v2footer button.sur-v2previous:focus-visible{
+ background:#e6c100!important;color:#082b54!important;
+}
+.sur-v2home .sur-v2footer button.sur-v2previous svg{stroke:currentColor!important}
 </style></head><body><header class="top"><div class="sur-header"><div class="sur-logo-holder"><img src="sur-logo-gold.svg?v=20261108-chikuyo-f5cd00" alt="SUR" class="sur-logo-image" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="sur-wordmark">SUR</div></div><div class="sur-header-copy"><div class="sur-expanded"><span class="sur-initial">S</span>tep <span class="sur-initial">U</span>p <span class="sur-initial">R</span>ehabilitation</div><div class="subtitle">筑陽学園高校サッカー部<br>リハビリサポートシステム</div></div></div><div id="sur-header-right" class="sur-header-right" style="display:none"></div><div id="sur-header-popover"></div></header><main id="app"><div class="card">接続しています…</div></main><script>
 (function(){const header=document.querySelector('.top');if(!header)return;const sync=()=>document.documentElement.style.setProperty('--sur-header-height',header.getBoundingClientRect().height+'px');sync();window.addEventListener('resize',sync);if(typeof ResizeObserver!=='undefined')new ResizeObserver(sync).observe(header)})();
 window.surBootPhase='認証ライブラリの読み込み開始前';
