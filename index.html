@@ -632,6 +632,16 @@ nav.no-print:not(.sur-player-mobile-nav)>button>span:first-child svg{display:blo
  color:var(--stage-text,#8191a5)!important;
  margin-bottom:3px;
 }
+
+/* Player HOME: matching 11px subtitles above both Stage and return countdown. */
+.sur-v2home .sur-v2stat-body.sur-v2countdown .sur-v2-return-label{
+ display:block;
+ font-size:11px!important;
+ font-weight:400;
+ line-height:1.4;
+ color:#667993;
+ margin-bottom:3px;
+}
 </style></head><body><header class="top"><div class="sur-header"><div class="sur-logo-holder"><img src="sur-logo-gold.svg?v=20261108-chikuyo-f5cd00" alt="SUR" class="sur-logo-image" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="sur-wordmark">SUR</div></div><div class="sur-header-copy"><div class="sur-expanded"><span class="sur-initial">S</span>tep <span class="sur-initial">U</span>p <span class="sur-initial">R</span>ehabilitation</div><div class="subtitle">筑陽学園高校サッカー部<br>リハビリサポートシステム</div></div></div><div id="sur-header-right" class="sur-header-right" style="display:none"></div><div id="sur-header-popover"></div></header><main id="app"><div class="card">接続しています…</div></main><script>
 (function(){const header=document.querySelector('.top');if(!header)return;const sync=()=>document.documentElement.style.setProperty('--sur-header-height',header.getBoundingClientRect().height+'px');sync();window.addEventListener('resize',sync);if(typeof ResizeObserver!=='undefined')new ResizeObserver(sync).observe(header)})();
 window.surBootPhase='認証ライブラリの読み込み開始前';
@@ -1186,7 +1196,7 @@ function surRehabUI(){
    <div class="sur-v2home-heading"><h1>HOME</h1><span>${esc(c.injury_category==='その他'?c.injury_other||'傷害':c.injury_category)} ／ ${esc(c.body_part==='その他'?c.body_part_other||'部位未設定':c.body_part||'')}</span></div>
    <div class="sur-v2stats">
     <div class="sur-v2stat sur-v2-stage-card sur-stage-${stage}"><div class="sur-v2stat-label">${surV2Icon('stage',20)}<span>現在のリハビリStage</span></div><div class="sur-v2stat-body sur-v2-stage-body"><span class="sur-v2-stage-elapsed">受傷から${spanDay===null?'—':Math.max(0,spanDay)+'日'}</span><b>Stage ${stage}</b><strong>${esc(stages[stage]||'')}</strong></div></div>
-    <div class="sur-v2stat"><div class="sur-v2stat-label">${surV2Icon('calendar',20)}<span>復帰目標</span></div><div class="sur-v2stat-body sur-v2countdown"><b>${esc(countdown)}</b><small>${c.target_return_on?'目標日 '+esc(c.target_return_on.slice(5).replace('-','/')):'目標日未設定'}</small></div></div>
+    <div class="sur-v2stat"><div class="sur-v2stat-label">${surV2Icon('calendar',20)}<span>復帰目標</span></div><div class="sur-v2stat-body sur-v2countdown"><span class="sur-v2-return-label">練習復帰まで</span><b>${esc(countdown)}</b><small>${c.target_return_on?'目標日 '+esc(c.target_return_on.slice(5).replace('-','/')):'目標日未設定'}</small></div></div>
    </div>
    <div class="sur-v2cal">
     <div class="sur-v2seg" role="group" aria-label="カレンダー表示切替">
