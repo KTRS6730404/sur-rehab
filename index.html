@@ -728,7 +728,7 @@ window.surShowNotifications=()=>{const box=document.getElementById('sur-header-p
 
 
 let surChatFilters={grade:'',position:'',query:''};
-const surChatSearchText=v=>String(v||'').normalize('NFKC').toLocaleLowerCase('ja-JP').replace(/[\\s　]+/g,'');
+const surChatSearchText=v=>String(v||'').normalize('NFKC').toLocaleLowerCase('ja-JP').replace(/\s+/g,'');
 window.surChatFilterChanged=(key,value)=>{
  if(!['grade','position','query'].includes(key))return;
  surChatFilters[key]=value;
