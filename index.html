@@ -517,6 +517,8 @@ nav.no-print:not(.sur-player-mobile-nav)>button>span:first-child svg{display:blo
  }
  nav.no-print.sur-staff-mobile-nav>button.nav-active svg{stroke:currentColor!important}
  nav.no-print.sur-staff-mobile-nav>button:last-child{display:none!important}
+ nav.no-print.sur-staff-mobile-nav.sur-staff-viewer-nav{grid-template-columns:repeat(5,minmax(0,1fr))!important}
+ nav.no-print.sur-staff-mobile-nav.sur-staff-viewer-nav>button:last-child{display:flex!important}
  /* Expanded category is a floating panel above the bottom tab bar, not another horizontal tab row. */
  nav.no-print.sur-staff-mobile-nav>.sur-subnav{
    position:absolute!important;left:9px!important;right:9px!important;bottom:calc(100% + 9px)!important;top:auto!important;
@@ -932,7 +934,7 @@ function nav(){
  const item=(title,action,selected,count=0,section='',sub='')=>'<button '+(title==='チャット'?'data-sur-chat-nav="1" ':'')+'class="'+(selected?'nav-active':'')+'" onclick="'+(section?'window.surNavChoose(&quot;'+section+'&quot;,&quot;'+sub+'&quot;);':'')+action+'"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;flex:0 0 24px;vertical-align:middle;opacity:.95;margin-right:6px">'+(surNavIcons[title.replace(/ [▾▸].*$/,'')]||'•')+'</span>'+title+badge(count)+'</button>';
  const settingsSub=profile.role==='admin'?[['account','アカウント',0],['applications','申請',pendingCount]]:[['applications','申請',pendingCount]];
  const weeklySub=[['報告の登録','window.surWeekly()',0],['過去の報告','window.surWeeklyHistory()',0]];
- let menu='<nav class="no-print '+(profile.role==='player'?'sur-player-mobile-nav':'sur-staff-mobile-nav')+'">'+item('HOME','window.surHome()',activeKey==='home',0,'home');
+ let menu='<nav class="no-print '+(profile.role==='player'?'sur-player-mobile-nav':profile.role==='viewer'?'sur-staff-mobile-nav sur-staff-viewer-nav':'sur-staff-mobile-nav')+'">'+item('HOME','window.surHome()',activeKey==='home',0,'home');
  if(profile.role==='player'){menu+=item('メニュー作成','window.surPlayerMenus()',activeKey==='player-menus',0,'player-menus')+item('傷害報告','window.surReports()',activeKey==='reports',0,'reports')}else{menu+=item('傷害報告','window.surReports()',activeKey==='reports',0,'reports')}
  if(profile.role!=='player'){
    menu+=item('リハビリ '+(rehabExpanded?'▾':'▸'),'window.surToggleRehab()',activeKey==='rehab');
