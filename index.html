@@ -479,6 +479,81 @@ nav.no-print:not(.sur-player-mobile-nav)>button>span:first-child svg{display:blo
  .top #sur-header-right{gap:3px!important}
  .top #sur-header-right .sur-header-tool{width:28px!important;height:28px!important;min-width:28px!important;flex-basis:28px!important}
 }
+
+/* Staff mobile navigation: same dock placement as player view, with expandable menu above it */
+@media (max-width:650px){
+ main#app:has(nav.sur-staff-mobile-nav){
+   margin:76px auto calc(95px + env(safe-area-inset-bottom,0px))!important;
+   padding:0 9px!important;min-width:0!important;max-width:100%!important;
+ }
+ nav.no-print.sur-staff-mobile-nav{
+   position:fixed!important;top:auto!important;bottom:0!important;left:0!important;right:0!important;
+   width:100%!important;height:calc(66px + env(safe-area-inset-bottom,0px))!important;
+   display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;
+   grid-template-rows:1fr!important;align-items:stretch!important;
+   flex-wrap:nowrap!important;gap:0!important;
+   border:0!important;border-top:2px solid #F5CD00!important;border-right:0!important;
+   margin:0!important;padding:5px 3px calc(5px + env(safe-area-inset-bottom,0px))!important;
+   background:#003080!important;box-shadow:0 -4px 18px #041b4355!important;
+   z-index:40!important;overflow:visible!important;white-space:normal!important;
+ }
+ nav.no-print.sur-staff-mobile-nav>button{
+   display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+   gap:4px!important;min-width:0!important;width:100%!important;max-width:100%!important;
+   min-height:47px!important;height:auto!important;padding:4px 1px!important;
+   flex:0 1 auto!important;font-size:9px!important;line-height:1.13!important;font-weight:750!important;
+   white-space:normal!important;word-break:normal!important;text-align:center!important;
+   color:#fff!important;background:transparent!important;box-shadow:none!important;border-radius:9px!important;
+ }
+ nav.no-print.sur-staff-mobile-nav>button>span:first-child{
+   width:23px!important;height:22px!important;min-height:22px!important;flex:0 0 22px!important;
+   display:flex!important;align-items:center!important;justify-content:center!important;margin:0!important;
+ }
+ nav.no-print.sur-staff-mobile-nav>button>span:first-child svg,
+ nav.no-print.sur-staff-mobile-nav>button>span:first-child img{width:20px!important;height:20px!important;max-width:20px!important;max-height:20px!important}
+ nav.no-print.sur-staff-mobile-nav>button.nav-active{
+   color:#F5CD00!important;background:#124b97!important;
+   box-shadow:inset 0 3px #F5CD00!important;
+ }
+ nav.no-print.sur-staff-mobile-nav>button.nav-active svg{stroke:currentColor!important}
+ nav.no-print.sur-staff-mobile-nav>button:last-child{display:none!important}
+ /* Expanded category is a floating panel above the bottom tab bar, not another horizontal tab row. */
+ nav.no-print.sur-staff-mobile-nav>.sur-subnav{
+   position:absolute!important;left:9px!important;right:9px!important;bottom:calc(100% + 9px)!important;top:auto!important;
+   display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:5px!important;
+   width:auto!important;max-height:min(55vh,420px)!important;overflow-y:auto!important;overflow-x:hidden!important;
+   margin:0!important;padding:10px!important;
+   border:1px solid #cdddef!important;border-top:4px solid #F5CD00!important;
+   border-radius:14px!important;background:#fff!important;box-shadow:0 8px 30px #061c4055!important;
+   z-index:41!important;white-space:normal!important
+ }
+ nav.no-print.sur-staff-mobile-nav>.sur-subnav>button,
+ nav.no-print.sur-staff-mobile-nav>.sur-subnav>.sur-subnav>button{
+   display:flex!important;flex:0 0 auto!important;align-items:center!important;justify-content:flex-start!important;
+   gap:8px!important;width:100%!important;min-height:41px!important;
+   padding:9px 12px!important;font-size:13px!important;line-height:1.35!important;
+   text-align:left!important;white-space:normal!important;border-radius:9px!important;
+   background:#edf4ff!important;color:#073b7d!important;box-shadow:none!important;
+ }
+ nav.no-print.sur-staff-mobile-nav>.sur-subnav .sur-subitem.nav-active{
+   background:#F5CD00!important;color:#003080!important;font-weight:850!important;
+ }
+ nav.no-print.sur-staff-mobile-nav>.sur-subnav .sur-subnav{
+   position:static!important;display:flex!important;flex-direction:column!important;gap:4px!important;
+   border:0!important;border-left:3px solid #F5CD00!important;background:#f5f9ff!important;
+   width:100%!important;margin:3px 0!important;padding:5px 5px 5px 9px!important;
+   box-shadow:none!important
+ }
+ nav.no-print.sur-staff-mobile-nav>.sur-subnav .sur-staff-logout-in-menu{
+   display:flex!important;color:#b32a38!important;background:#fff2f3!important;margin-top:6px!important
+ }
+ .sur-staff-logout-in-menu{display:none!important}
+ nav.no-print.sur-staff-mobile-nav .sur-count-badge{
+   min-width:13px!important;font-size:8px!important;line-height:13px!important;padding:0 3px!important;margin:0!important
+ }
+}
+/* Do not show the mobile-only logout shortcut in the desktop sidebar. */
+@media (min-width:651px){.sur-staff-logout-in-menu{display:none!important}}
 </style></head><body><header class="top"><div class="sur-header"><div class="sur-logo-holder"><img src="sur-logo-gold.svg?v=20261108-chikuyo-f5cd00" alt="SUR" class="sur-logo-image" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="sur-wordmark">SUR</div></div><div class="sur-header-copy"><div class="sur-expanded"><span class="sur-initial">S</span>tep <span class="sur-initial">U</span>p <span class="sur-initial">R</span>ehabilitation</div><div class="subtitle">筑陽学園高校サッカー部<br>リハビリサポートシステム</div></div></div><div id="sur-header-right" class="sur-header-right" style="display:none"></div><div id="sur-header-popover"></div></header><main id="app"><div class="card">接続しています…</div></main><script>
 (function(){const header=document.querySelector('.top');if(!header)return;const sync=()=>document.documentElement.style.setProperty('--sur-header-height',header.getBoundingClientRect().height+'px');sync();window.addEventListener('resize',sync);if(typeof ResizeObserver!=='undefined')new ResizeObserver(sync).observe(header)})();
 window.surBootPhase='認証ライブラリの読み込み開始前';
@@ -857,7 +932,7 @@ function nav(){
  const item=(title,action,selected,count=0,section='',sub='')=>'<button '+(title==='チャット'?'data-sur-chat-nav="1" ':'')+'class="'+(selected?'nav-active':'')+'" onclick="'+(section?'window.surNavChoose(&quot;'+section+'&quot;,&quot;'+sub+'&quot;);':'')+action+'"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;flex:0 0 24px;vertical-align:middle;opacity:.95;margin-right:6px">'+(surNavIcons[title.replace(/ [▾▸].*$/,'')]||'•')+'</span>'+title+badge(count)+'</button>';
  const settingsSub=profile.role==='admin'?[['account','アカウント',0],['applications','申請',pendingCount]]:[['applications','申請',pendingCount]];
  const weeklySub=[['報告の登録','window.surWeekly()',0],['過去の報告','window.surWeeklyHistory()',0]];
- let menu='<nav class="no-print '+(profile.role==='player'?'sur-player-mobile-nav':'')+'">'+item('HOME','window.surHome()',activeKey==='home',0,'home');
+ let menu='<nav class="no-print '+(profile.role==='player'?'sur-player-mobile-nav':'sur-staff-mobile-nav')+'">'+item('HOME','window.surHome()',activeKey==='home',0,'home');
  if(profile.role==='player'){menu+=item('メニュー作成','window.surPlayerMenus()',activeKey==='player-menus',0,'player-menus')+item('傷害報告','window.surReports()',activeKey==='reports',0,'reports')}else{menu+=item('傷害報告','window.surReports()',activeKey==='reports',0,'reports')}
  if(profile.role!=='player'){
    menu+=item('リハビリ '+(rehabExpanded?'▾':'▸'),'window.surToggleRehab()',activeKey==='rehab');
@@ -880,7 +955,7 @@ function nav(){
  if(['admin','staff','commenter'].includes(profile.role)){
    const total=settingsSub.reduce((n,row)=>n+row[2],0);
    menu+=item('設定 '+(settingsExpanded?'▾':'▸'),'window.surToggleSettings()',activeKey==='settings',total);
-   if(settingsExpanded)menu+='<div class="sur-subnav">'+settingsSub.map(([key,label,count])=>'<button class="sur-subitem '+(activeKey==='settings:'+key?'nav-active':'')+'" onclick="window.surNavChoose(&quot;settings&quot;,&quot;'+key+'&quot;);window.surSettings(&quot;'+key+'&quot;)"><span style="display:inline-block;width:23px">'+(surNavIcons[label]||'•')+'</span>'+label+badge(count)+'</button>').join('')+(profile.role==='admin'?'<button class="sur-subitem" onclick="window.surTogglePermissions()"><span style="display:inline-block;width:23px">'+surNavIcons['権限']+'</span>権限 '+(permissionExpanded?'▾':'▸')+'</button>'+(permissionExpanded?'<div class="sur-subnav"><button class="sur-subitem '+(activeKey==='settings:players'?'nav-active':'')+'" onclick="window.surNavChoose(&quot;settings&quot;,&quot;players&quot;);window.surSettings(&quot;players&quot;)">選手</button><button class="sur-subitem '+(activeKey==='settings:staff-list'?'nav-active':'')+'" onclick="window.surNavChoose(&quot;settings&quot;,&quot;staff-list&quot;);window.surSettings(&quot;staff-list&quot;)">スタッフ</button></div>':''):'')+'</div>';
+   if(settingsExpanded)menu+='<div class="sur-subnav">'+settingsSub.map(([key,label,count])=>'<button class="sur-subitem '+(activeKey==='settings:'+key?'nav-active':'')+'" onclick="window.surNavChoose(&quot;settings&quot;,&quot;'+key+'&quot;);window.surSettings(&quot;'+key+'&quot;)"><span style="display:inline-block;width:23px">'+(surNavIcons[label]||'•')+'</span>'+label+badge(count)+'</button>').join('')+(profile.role==='admin'?'<button class="sur-subitem" onclick="window.surTogglePermissions()"><span style="display:inline-block;width:23px">'+surNavIcons['権限']+'</span>権限 '+(permissionExpanded?'▾':'▸')+'</button>'+(permissionExpanded?'<div class="sur-subnav"><button class="sur-subitem '+(activeKey==='settings:players'?'nav-active':'')+'" onclick="window.surNavChoose(&quot;settings&quot;,&quot;players&quot;);window.surSettings(&quot;players&quot;)">選手</button><button class="sur-subitem '+(activeKey==='settings:staff-list'?'nav-active':'')+'" onclick="window.surNavChoose(&quot;settings&quot;,&quot;staff-list&quot;);window.surSettings(&quot;staff-list&quot;)">スタッフ</button></div>':''):'')+'<button type="button" class="sur-subitem sur-staff-logout-in-menu" onclick="window.surSignout()">ログアウト</button></div>';
  }
  return menu+item('ログアウト','window.surSignout()',false,0,'logout')+'</nav>';
 }
