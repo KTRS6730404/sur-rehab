@@ -1037,6 +1037,15 @@ window.surLoadNotifications=async(show=false)=>{
   (requests.data||[]).forEach(x=>items.push({key:'request-'+x.id,title:'新しい登録申請',text:x.full_name||'氏名未設定'}));
   (help.data||[]).forEach(x=>items.push({key:'help-'+x.id,title:'選手からの相談',text:x.kind+'：'+(x.message||'内容を確認してください')}));
   (cs.data||[]).forEach(x=>{if(x.current_stage===7&&!x.return_reviewed_at)items.push({key:'return-'+x.id,title:'復帰確認待ち',text:x.player_name||'選手'});else if(x.current_stage!==7&&!x.reviewed_at)items.push({key:'report-'+x.id,title:'新規傷害報告',text:x.player_name||'選手'})});
+  const history=await sb.from('sur_stage_history').select('id,case_id,from_stage,to_stage,evaluation,created_at').order('created_at',{ascending:false}).limit(100);
+  if(!history.error){
+   const caseById=new Map((cs.data||[]).map(c=>[c.id,c]));
+   (history.data||[]).filter(h=>h.evaluation?.source==='player_checklist').forEach(h=>{
+    const c=caseById.get(h.case_id);
+    if(!c)return;
+    items.push({key:'stage-staff-'+h.id,title:h.to_stage===7?'選手が練習復帰を登録':'選手のリハビリStage更新',text:(c.player_name||'選手')+'：Stage '+h.from_stage+' → '+(h.to_stage===7?'復帰済み':'Stage '+h.to_stage)});
+   });
+  }
  }
  if(profile.role==='player'){const mine=cases.filter(c=>c.player_id===user.id);if(mine.length){const ids=mine.map(c=>c.id);const hist=await sb.from('sur_stage_history').select('id,case_id,to_stage,created_at').in('case_id',ids).order('created_at',{ascending:false}).limit(50);(hist.data||[]).forEach(x=>{const c=mine.find(c=>c.id===x.case_id);items.push({key:'stage-'+x.id,title:'リハビリStage更新',text:(c?.injury_category||'傷害')+'：'+(stages[x.to_stage]||'Stage '+x.to_stage)})})}}
  if(profile.role==='player'){
@@ -1520,11 +1529,9 @@ window.surAdvanceChecklist=async(id,button)=>{
  const state=surPlayerChecklistState.get(id);if(!state||profile.role!=='player')return;
  if(!confirm(state.stage===6?'練習復帰を確定しますか？':'Stage '+(state.stage+1)+'へ進みますか？'))return;
  button.disabled=true;
- const row={current_stage:state.stage+1};
- if(state.stage===6)row.returned_on=new Date().toLocaleDateString('sv-SE',{timeZone:'Asia/Tokyo'});
- const r=await sb.from('sur_cases').update(row).eq('id',id).eq('current_stage',state.stage).select('id');
+ const r=await sb.rpc('sur_player_advance_checked_stage',{p_case_id:id,p_expected_stage:state.stage});
  if(r.error){err(r.error);await window.surLoadStageChecklist(id);return}
- if(!r.data?.length){msg('Stageが変更されています。画面を更新します');await refresh();return}
+ if(r.data!==state.stage+1){msg('ステージの更新結果を確認できませんでした');await refresh();return}
  surPlayerChecklistState.delete(id);await refresh();msg(state.stage===6?'練習復帰を記録しました':'次のStageへ進みました');
 };
 
