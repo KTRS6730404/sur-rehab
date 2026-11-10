@@ -968,10 +968,11 @@ window.surChat=async(id)=>{
  if(!surChatPlayers.some(p=>p.id===surChatSelected))surChatSelected=surChatPlayers[0]?.id||null;
  if(!staff&&surChatRecipient&&surChatRecipient!=='all'&&!surChatStaff.some(p=>p.id===surChatRecipient))surChatRecipient='';
  const recipientField=!staff?'<div class="sur-chat-recipient-box"><label for="sur-chat-recipient">送信先スタッフ</label><select id="sur-chat-recipient" onchange="window.surChatRecipientChanged(this.value)"><option value="">送信先を選択してください</option><option value="all" '+(surChatRecipient==='all'?'selected':'')+'>スタッフ全員（共通）</option>'+surChatStaff.map(p=>'<option value="'+esc(p.id)+'" '+(surChatRecipient===p.id?'selected':'')+'>'+esc(p.full_name)+'</option>').join('')+'</select><p class="muted">宛先を個別に指定できますが、会話内容はチーム内の承認スタッフにも共有されます。緊急連絡には使用しないでください。</p></div>':'<p class="muted">メッセージには指定された送信先スタッフを表示します。選手とのやり取りはチームで共有されます。緊急連絡には使用しないでください。</p>';
- draw(nav()+'<div class="card"><h1>チャット</h1><div class="sur-chat-layout">'+(staff?'<div class="sur-chat-staff-sidebar">'+surChatStaffSearchUI()+'</div>':'')+'<div class="sur-chat-main"><h2>'+esc(staff?(surChatPlayers.find(p=>p.id===surChatSelected)?.full_name||'選手を選択'):'スタッフへの連絡')+'</h2>'+recipientField+'<div class="sur-chat-thread" id="sur-chat-thread">読み込み中…</div>'+(!staff?'<div class="sur-chat-help"><h3>困ったとき</h3><div class="sur-chat-help-options">'+['痛み','方法','難しい','相談'].map(k=>'<button type="button" class="secondary" onclick="window.surChatHelp(&quot;'+k+'&quot;)">'+({痛み:'痛みが出た',方法:'やり方が不明',難しい:'難しすぎる',相談:'スタッフに相談'}[k])+'</button>').join('')+'</div></div>':'')+'<div class="sur-chat-compose"><textarea id="sur-chat-input" rows="2" maxlength="2000" placeholder="メッセージを入力"></textarea><button id="sur-chat-send-button" onclick="window.surChatSend()" '+(!surChatSelected||(!staff&&!surChatRecipient)?'disabled':'')+'>送信</button></div></div></div></div>');
+ draw(nav()+'<div class="card"><h1>チャット</h1><div class="sur-chat-layout">'+(staff?'<div class="sur-chat-staff-sidebar">'+surChatStaffSearchUI()+'</div>':'')+'<div class="sur-chat-main"><h2>'+esc(staff?(surChatPlayers.find(p=>p.id===surChatSelected)?.full_name||'選手を選択'):'スタッフへの連絡')+'</h2>'+recipientField+'<div class="sur-chat-thread" id="sur-chat-thread">読み込み中…</div>'+(!staff?'<div class="sur-chat-help"><h3>困ったとき</h3><div class="sur-chat-help-options">'+['痛み','方法','難しい','相談'].map(k=>'<button type="button" class="secondary" onclick="window.surChatHelp(&quot;'+k+'&quot;)">'+({痛み:'痛みが出た',方法:'やり方が不明',難しい:'難しすぎる',相談:'スタッフに相談'}[k])+'</button>').join('')+'</div></div>':'')+(!staff?'<div class="sur-chat-topic-row"><label for="sur-chat-category">項目（必須）<select id="sur-chat-category" required onchange="window.surChatTopicChanged(this.value)"><option value="">項目を選択してください</option>'+['怪我について','リハビリについて','トレーニングについて','欠席について','遅刻について','その他'].map(x=>'<option value="'+x+'">'+x+'</option>').join('')+'</select></label><label id="sur-chat-absence-label" style="display:none">欠席日<input id="sur-chat-absence-date" type="date" value="'+surDailyDay()+'"></label></div>':'')+'<div class="sur-chat-compose"><textarea id="sur-chat-input" rows="2" maxlength="2000" placeholder="メッセージを入力"></textarea><button id="sur-chat-send-button" onclick="window.surChatSend()" '+(!surChatSelected||(!staff&&!surChatRecipient)?'disabled':'')+'>送信</button></div></div></div></div>');
  if(staff)window.surChatRenderPlayers();
  await window.surChatLoad();
 };
+window.surChatTopicChanged=value=>{const box=document.getElementById('sur-chat-absence-label');if(box)box.style.display=value==='欠席について'?'block':'none'};
 window.surChatRecipientChanged=value=>{
  surChatRecipient=value;
  const button=document.getElementById('sur-chat-send-button');
@@ -979,7 +980,7 @@ window.surChatRecipientChanged=value=>{
 };
 window.surChatLoad=async()=>{
  const id=surChatSelected,box=document.getElementById('sur-chat-thread');if(!id||!box||view!=='chat')return;
- const res=await sb.from('sur_chat_messages').select('id,player_id,sender_id,recipient_staff_id,body,created_at').eq('player_id',id).order('created_at',{ascending:true}).limit(300);
+ const res=await sb.from('sur_chat_messages').select('id,player_id,sender_id,recipient_staff_id,body,category,absence_on,created_at').eq('player_id',id).order('created_at',{ascending:true}).limit(300);
  if(res.error){box.textContent='読み込みエラー：'+res.error.message;return}
  const messages=res.data||[],ids=[...new Set(messages.filter(m=>m.sender_id!==id).map(m=>m.sender_id))];
  const p=ids.length?await sb.from('sur_profiles').select('id,full_name').in('id',ids):{data:[]};
@@ -988,7 +989,7 @@ window.surChatLoad=async()=>{
  box.innerHTML=messages.map(m=>{
   const who=m.sender_id===id?(surChatPlayers.find(p=>p.id===id)?.full_name||'選手'):(names.get(m.sender_id)||'スタッフ');
   const to=m.recipient_staff_id?(names.get(m.recipient_staff_id)||'指定スタッフ'):'スタッフ全員';
-  return '<div class="sur-chat-message '+(m.sender_id===user.id?'sur-chat-mine':'')+'"><small>'+esc(who)+' ・ '+esc(new Date(m.created_at).toLocaleString('ja-JP'))+' <span class="sur-chat-to">宛先：'+esc(to)+'</span></small><p>'+esc(m.body)+'</p></div>';
+  return '<div class="sur-chat-message '+(m.sender_id===user.id?'sur-chat-mine':'')+'"><small>'+esc(who)+' ・ '+esc(new Date(m.created_at).toLocaleString('ja-JP'))+' <span class="sur-chat-to">宛先：'+esc(to)+'</span></small>'+(m.category?'<small>項目：'+esc(m.category)+(m.absence_on?' ／ 欠席日：'+esc(m.absence_on):'')+'</small>':'')+'<p>'+esc(m.body)+'</p></div>';
  }).join('')||'<p class="muted">まだメッセージがありません。</p>';
  box.dataset.latestId=messages.at(-1)?.id||'';box.scrollTop=box.scrollHeight;
  await sb.from('sur_chat_reads').upsert({user_id:user.id,player_id:id,last_read_at:new Date().toISOString()},{onConflict:'user_id,player_id'});
@@ -1001,13 +1002,17 @@ window.surChatSend=async()=>{
  const isPlayer=profile.role==='player';
  if(isPlayer&&!surChatRecipient){msg('送信先スタッフを選択してください');return}
  if(isPlayer&&surChatRecipient!=='all'&&!surChatStaff.some(x=>x.id===surChatRecipient)){msg('現在選択できるスタッフを指定してください');return}
+ const category=isPlayer?document.getElementById('sur-chat-category')?.value||'':null;
+ if(isPlayer&&!category){msg('項目を選択してください');return}
+ const absence_on=isPlayer&&category==='欠席について'?document.getElementById('sur-chat-absence-date')?.value:null;
+ if(category==='欠席について'&&!absence_on){msg('欠席日を選択してください');return}
  const recipient_staff_id=isPlayer?(surChatRecipient==='all'?null:surChatRecipient):user.id;
  const btn=document.getElementById('sur-chat-send-button');
  if(btn)btn.disabled=true;
- const r=await sb.from('sur_chat_messages').insert({player_id:surChatSelected,sender_id:user.id,recipient_staff_id,body});
+ const r=await sb.from('sur_chat_messages').insert({player_id:surChatSelected,sender_id:user.id,recipient_staff_id,body,category,absence_on:absence_on||null});
  if(btn)btn.disabled=false;
  if(r.error)return err(r.error);
- input.value='';await window.surChatLoad();
+ input.value='';if(isPlayer){const choice=document.getElementById('sur-chat-category');if(choice)choice.value='';window.surChatTopicChanged('')};await window.surChatLoad();
 };
 window.surChatRefresh=async()=>{
  if(!user||!profile||profile.is_hidden)return;
