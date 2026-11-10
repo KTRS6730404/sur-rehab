@@ -729,14 +729,14 @@ nav.no-print:not(.sur-player-mobile-nav)>button>span:first-child svg{display:blo
 /* 2026-11-11: Mobile bottom navigation safe area and fully visible touch targets.
    Applies only to phone layouts, and fixes Safari toolbar / home indicator overlap. */
 @media (max-width:650px){
-  :root{--sur-nav-bottom-safe:max(18px, env(safe-area-inset-bottom, 0px));}
+  :root{--sur-nav-bottom-safe:max(12px, env(safe-area-inset-bottom, 0px));}
   nav.no-print.sur-player-mobile-nav,
   nav.no-print.sur-staff-mobile-nav{
     box-sizing:border-box!important;
     bottom:0!important;
-    height:calc(78px + var(--sur-nav-bottom-safe))!important;
-    min-height:calc(78px + var(--sur-nav-bottom-safe))!important;
-    padding:7px 4px calc(8px + var(--sur-nav-bottom-safe))!important;
+    height:calc(71px + var(--sur-nav-bottom-safe))!important;
+    min-height:calc(71px + var(--sur-nav-bottom-safe))!important;
+    padding:6px 4px calc(6px + var(--sur-nav-bottom-safe))!important;
     grid-template-rows:minmax(0,1fr)!important;
     align-items:stretch!important;
   }
@@ -748,11 +748,11 @@ nav.no-print:not(.sur-player-mobile-nav)>button>span:first-child svg{display:blo
     padding:4px 1px!important;
     justify-content:center!important;
     overflow:hidden!important;
-    line-height:1.2!important;
+    line-height:1.15!important;
     font-size:10px!important;
     word-break:keep-all!important;
     overflow-wrap:normal!important;
-    gap:4px!important;
+    gap:3px!important;
   }
   nav.no-print.sur-player-mobile-nav>button>span:first-child,
   nav.no-print.sur-staff-mobile-nav>button>span:first-child{
@@ -769,8 +769,8 @@ nav.no-print:not(.sur-player-mobile-nav)>button>span:first-child svg{display:blo
   }
   main#app:has(nav.sur-player-mobile-nav),
   main#app:has(nav.sur-staff-mobile-nav){
-    margin-bottom:calc(110px + var(--sur-nav-bottom-safe))!important;
-    padding-bottom:12px!important;
+    margin-bottom:calc(98px + var(--sur-nav-bottom-safe))!important;
+    padding-bottom:8px!important;
   }
   nav.no-print.sur-player-mobile-nav>.sur-mobile-settings-menu,
   nav.no-print.sur-staff-mobile-nav>.sur-subnav{
