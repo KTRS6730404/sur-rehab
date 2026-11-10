@@ -759,15 +759,15 @@ const surGuideTitles=['ケガをした直後の過ごし方','痛みと腫れの
 const surGuideImage=async(root)=>{for(const img of root.querySelectorAll('img[data-sur-guide-path]')){const path=img.dataset.surGuidePath;if(!path)continue;const r=await sb.storage.from('sur-rehab-media').createSignedUrl(path,3600);if(r.data?.signedUrl)img.src=r.data.signedUrl}};
 const surGuideIcon=n=>['shield-check','activity','clipboard-check','layers','route','messages-square'][n]||'book-open';
 const surGuideBodyHTML=body=>{
- const text=String(body||'').replace(/\\r/g,'').trim();
+ const text=String(body||'').replace(/\r/g,'').trim();
  if(!text)return '<p class="muted">本文は準備中です。</p>';
  const chunks=text.split(/【(ポイント|ひとこと|注意)】/);
- let html='<p class="sur-guide-intro">'+esc(chunks[0].trim()).replace(/\\n+/g,'<br>')+'</p>';
+ let html='<p class="sur-guide-intro">'+esc(chunks[0].trim()).replace(/\n+/g,'<br>')+'</p>';
  for(let i=1;i<chunks.length-1;i+=2){
   const tag=chunks[i],content=chunks[i+1].trim();
-  if(tag==='ポイント')html+='<section class="sur-guide-points"><h3>✓ 大切なポイント</h3><ul>'+content.split('\\n').filter(Boolean).map(line=>'<li>'+esc(line.replace(/^・/,'').trim())+'</li>').join('')+'</ul></section>';
-  else if(tag==='ひとこと')html+='<div class="sur-guide-tip"><span aria-hidden="true">💡</span><div><b>ひとこと</b><p>'+esc(content).replace(/\\n/g,'<br>')+'</p></div></div>';
-  else if(tag==='注意')html+='<div class="sur-guide-caution"><b>注意・相談の目安</b><p>'+esc(content).replace(/\\n/g,'<br>')+'</p></div>';
+  if(tag==='ポイント')html+='<section class="sur-guide-points"><h3>✓ 大切なポイント</h3><ul>'+content.split('\n').filter(Boolean).map(line=>'<li>'+esc(line.replace(/^・/,'').trim())+'</li>').join('')+'</ul></section>';
+  else if(tag==='ひとこと')html+='<div class="sur-guide-tip"><span aria-hidden="true">💡</span><div><b>ひとこと</b><p>'+esc(content).replace(/\n/g,'<br>')+'</p></div></div>';
+  else if(tag==='注意')html+='<div class="sur-guide-caution"><b>注意・相談の目安</b><p>'+esc(content).replace(/\n/g,'<br>')+'</p></div>';
  }
  return html;
 };
