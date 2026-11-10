@@ -777,6 +777,11 @@ nav.no-print:not(.sur-player-mobile-nav)>button>span:first-child svg{display:blo
     bottom:calc(100% + 8px)!important;
   }
 }
+.sur-v2home .sur-v2-stage-body .sur-v2-next-stage{margin-top:8px;padding:8px 12px;font-size:12px;font-weight:700;align-self:center;background:#FFD43B;color:#082b50}
+.sur-stage-checklist{margin:12px 0;padding:14px;border:1px solid #dce5ef;border-radius:12px;background:#f5f9fe}
+.sur-stage-checklist[hidden]{display:none!important}
+.sur-stage-checklist h2{margin:0 0 8px;font-size:16px}
+.sur-stage-checklist p{margin:0;font-size:13px}
 </style></head><body><header class="top"><div class="sur-header"><div class="sur-logo-holder"><img src="sur-logo-gold.svg?v=20261108-chikuyo-f5cd00" alt="SUR" class="sur-logo-image" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"><div class="sur-wordmark">SUR</div></div><div class="sur-header-copy"><div class="sur-expanded"><span class="sur-initial">S</span>tep <span class="sur-initial">U</span>p <span class="sur-initial">R</span>ehabilitation</div><div class="subtitle">筑陽学園高校サッカー部<br>リハビリサポートシステム</div></div></div><div id="sur-header-right" class="sur-header-right" style="display:none"></div><div id="sur-header-popover"></div></header><main id="app"><div class="card">接続しています…</div></main><script>
 (function(){const header=document.querySelector('.top');if(!header)return;const sync=()=>document.documentElement.style.setProperty('--sur-header-height',header.getBoundingClientRect().height+'px');sync();window.addEventListener('resize',sync);if(typeof ResizeObserver!=='undefined')new ResizeObserver(sync).observe(header)})();
 window.surBootPhase='認証ライブラリの読み込み開始前';
@@ -1419,6 +1424,12 @@ function surV2CalendarHTML(id){
  ${selectedText}`;
 }
 
+window.surToggleStageChecklist=(id,button)=>{
+ const panel=document.getElementById('sur-stage-checklist-'+id);
+ if(!panel)return;
+ panel.hidden=!panel.hidden;
+ button.setAttribute('aria-expanded',String(!panel.hidden));
+};
 function surRehabUI(){
  const list=cases.filter(c=>c.player_id===user.id&&c.current_stage!==7);
  if(!list.length)return '<div class="card"><h2>現在のリハビリ</h2><p>現在実施中の傷害報告はありません。</p><button onclick="window.surNew()">＋ 傷害報告を登録</button></div>';
@@ -1431,9 +1442,10 @@ function surRehabUI(){
   return `<section class="card sur-v2home" data-case-id="${id}">
    <div class="sur-v2home-heading"><h1>HOME</h1><span>${esc(c.injury_category==='その他'?c.injury_other||'傷害':c.injury_category)} ／ ${esc(c.body_part==='その他'?c.body_part_other||'部位未設定':c.body_part||'')}</span></div>
    <div class="sur-v2stats">
-    <div class="sur-v2stat sur-v2-stage-card sur-stage-${stage}"><div class="sur-v2stat-label">${surV2Icon('stage',20)}<span>現在のリハビリStage</span></div><div class="sur-v2stat-body sur-v2-stage-body"><span class="sur-v2-stage-elapsed">受傷から${spanDay===null?'—':Math.max(0,spanDay)+'日'}</span><b>Stage ${stage}</b><strong>${esc(stages[stage]||'')}</strong></div></div>
-    <div class="sur-v2stat"><div class="sur-v2stat-label">${surV2Icon('calendar',20)}<span>復帰目標</span></div><div class="sur-v2stat-body sur-v2countdown"><span class="sur-v2-return-label">練習復帰まで</span><b>${esc(countdown)}</b><small>${c.target_return_on?'目標日 '+esc(c.target_return_on.slice(5).replace('-','/')):'目標日未設定'}</small></div></div>
+    <div class="sur-v2stat sur-v2-stage-card sur-stage-${stage}"><div class="sur-v2stat-label">${surV2Icon('stage',20)}<span>現在のリハビリStage</span></div><div class="sur-v2stat-body sur-v2-stage-body"><strong>${esc(stages[stage]||'')}</strong><b>Stage ${stage}</b><button type="button" class="sur-v2-next-stage" aria-expanded="false" aria-controls="sur-stage-checklist-${id}" onclick="window.surToggleStageChecklist(&quot;${id}&quot;,this)">次のステージへ</button></div></div>
+    <div class="sur-v2stat"><div class="sur-v2stat-label">${surV2Icon('calendar',20)}<span>復帰目標</span></div><div class="sur-v2stat-body sur-v2countdown"><span class="sur-v2-return-label">${c.target_return_on?'目標日 '+esc(c.target_return_on.slice(5).replace('-','/')):'目標日未設定'}</span><b>${esc(countdown)}</b><small>受傷日から${spanDay===null?'—':Math.max(0,spanDay)+'日'}</small></div></div>
    </div>
+   <div id="sur-stage-checklist-${id}" class="sur-stage-checklist" hidden><h2>次のステージへ</h2><p>Stage ${stage} のチェック項目は未設定です。</p></div>
    <div class="sur-v2cal">
     <div class="sur-v2seg" role="group" aria-label="カレンダー表示切替">
       <button type="button" class="${st.mode==='week'?'active':''}" aria-pressed="${st.mode==='week'}" onclick="window.surV2SetMode(&quot;${id}&quot;,&quot;week&quot;)">${surV2Icon('calendar',17)}週間</button>
