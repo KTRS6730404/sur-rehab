@@ -873,7 +873,7 @@ window.surGuide=async()=>{
    const url=storage?'':g.image_url;
    asset='<div class="sur-guide-hero"><a href="'+esc(url||'#')+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(label)+'の画像を拡大表示"><img loading="lazy" '+(storage?'data-sur-guide-path="'+esc(g.image_url.slice(16))+'"':'src="'+esc(url)+'"')+' alt="'+esc(label)+'の説明画像（全文）"></a></div>';
   }
-  return '<details class="sur-guide-entry sur-guide-lesson" '+(i===0?'open':'')+'><summary><span class="sur-guide-number">'+String(i+1).padStart(2,'0')+'</span><span class="sur-guide-lesson-title">'+esc(label)+'</span><span class="sur-guide-summary-arrow" aria-hidden="true"></span></summary><div class="sur-guide-content sur-guide-image-only">'+asset+'<p class="sur-guide-image-hint">画像をタップすると大きく表示できます。</p></div></details>';
+  return '<details class="sur-guide-entry sur-guide-lesson"><summary><span class="sur-guide-number">'+String(i+1).padStart(2,'0')+'</span><span class="sur-guide-lesson-title">'+esc(label)+'</span><span class="sur-guide-summary-arrow" aria-hidden="true"></span></summary><div class="sur-guide-content sur-guide-image-only">'+asset+'<p class="sur-guide-image-hint">画像をタップすると大きく表示できます。</p></div></details>';
  }).join('')||'<p>公開中の資料はありません。</p>';
  surGuideImage(el);
 };
