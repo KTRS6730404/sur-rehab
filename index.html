@@ -253,11 +253,13 @@ main .card .sur-plan-button-row>button:first-child:not(.secondary):not(.danger){
 .sur-staff-page-title h1{color:#15273f;margin:0;display:flex;align-items:center;gap:9px;font-size:25px;line-height:1.3}
 .sur-staff-page-title h1:before{content:"";width:8px;height:28px;background:var(--staff-yellow);border-radius:4px;display:block;transform:skew(-17deg)}
 .sur-staff-page-title>span{font-size:12px;font-weight:650;color:var(--staff-muted)}
-.sur-staff-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 16px}
+.sur-staff-summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:0 0 16px}
 .sur-staff-summary-card{display:flex;align-items:center;gap:11px;background:#fff;color:#172a45;text-align:left;min-width:0;min-height:109px;padding:14px 12px;border:1px solid #dfe9f4;border-radius:14px;box-shadow:0 4px 13px #05346b13}
 .sur-staff-summary-card:hover{background:#fffbe9;border-color:#ebd370;transform:translateY(-1px)}
 .sur-staff-summary-icon{width:57px;height:57px;flex:0 0 57px;display:grid;place-items:center;border-radius:12px;background:#e7f0ff;color:#0953a5}
 .sur-staff-summary-partial,.sur-staff-summary-week{background:#fff4ca;color:#c59c00}
+.sur-staff-summary-absence{background:#ffe8e8;color:#ae3e4a}
+.sur-chat-topic-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:12px 0}.sur-chat-topic-row label{margin:0}.sur-chat-topic-row select,.sur-chat-topic-row input{margin-top:6px}
 .sur-staff-summary-copy{display:flex;flex:1;flex-direction:column;min-width:0;gap:6px}
 .sur-staff-summary-copy>span{font-size:13px;font-weight:800;white-space:nowrap}
 .sur-staff-summary-copy>b{font-size:32px;line-height:1;font-weight:900;color:#111c30;font-variant-numeric:tabular-nums}
@@ -1810,7 +1812,7 @@ const surCheckDailyBoundary=()=>{const key=surDailyDay();if(key===surDailyDispla
 window.surDailyBoundaryTimer=window.surDailyBoundaryTimer||setInterval(surCheckDailyBoundary,30000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)surCheckDailyBoundary()});
 window.surLoadStaffAlerts=async()=>{const box=document.getElementById('sur-staff-alerts');if(!box)return;const [help,checks,sessions]=await Promise.all([sb.from('sur_player_help').select('*').eq('status','open').order('created_at',{ascending:false}).limit(100),sb.from('sur_daily_checks').select('*').order('day',{ascending:false}).limit(300),sb.from('sur_sessions').select('case_id,completed_on').order('completed_on',{ascending:false}).limit(300)]);if(help.error||checks.error||sessions.error){box.textContent='確認事項を取得できませんでした';return}const urgent=(checks.data||[]).filter(x=>x.pain>=5||x.swelling==='強い'||x.trend==='悪い');const stalled=cases.filter(c=>c.current_stage!==7&&!((checks.data||[]).some(x=>x.case_id===c.id&&surDays(x.day,today())<=7)||(sessions.data||[]).some(x=>x.case_id===c.id&&surDays(x.completed_on,today())<=7)));box.innerHTML='<h2>スタッフ確認事項</h2><p class="muted">相談 → 症状悪化 → 記録なしの順で確認してください。記録なし＝未実施とは限りません。</p><section class="sur-alert-section sur-alert-help" style="background:#f2f7ff!important;border:1px solid #d7e6fa!important"><h3>相談（'+(help.data||[]).length+'）</h3>'+((help.data||[]).map(x=>{const c=cases.find(c=>c.id===x.case_id);return '<div class="report-mini" style="cursor:default"><b>'+esc(c?.player_name||'選手')+'</b><span>'+esc(x.kind)+'：'+esc(x.message||'詳細なし')+'</span><button onclick="window.surResolveHelp(&quot;'+x.id+'&quot;)">対応済み</button></div>'}).join(''))+'</section><section class="sur-alert-section sur-alert-urgent" style="background:#f2f7ff!important;border:1px solid #d7e6fa!important"><h3>体調変化・強い症状（'+urgent.length+'）</h3>'+urgent.slice(0,25).map(x=>{const c=cases.find(c=>c.id===x.case_id);return '<button class="report-mini" onclick="window.surCase(&quot;'+x.case_id+'&quot;)"><b>'+esc(c?.player_name||'選手')+'</b><span>NRS '+x.pain+' / '+esc(x.swelling)+' / '+esc(x.trend)+'</span><span>'+esc(x.day)+'</span></button>'}).join('')+'</section><section class="sur-alert-section sur-alert-stalled" style="background:#f2f7ff!important;border:1px solid #d7e6fa!important"><h3>7日以内に記録なし・要確認（'+stalled.length+'）</h3>'+stalled.slice(0,25).map(c=>'<button class="report-mini" onclick="window.surCase(&quot;'+c.id+'&quot;)"><b>'+esc(c.player_name)+'</b><span>状況確認</span></button>').join('')+'</section>'};
-const surStaffState={mode:'week',anchor:null,selected:null,seq:0,checks:[],sessions:[],plans:[],helps:[],grades:new Map(),error:'',truncated:false,showAll:false};
+const surStaffState={mode:'week',anchor:null,selected:null,seq:0,checks:[],sessions:[],plans:[],helps:[],absences:[],absenceProfiles:new Map(),grades:new Map(),error:'',truncated:false,showAll:false};
 function surStaffIcon(kind,size=22){
  const paths={
  people:'<circle cx="9" cy="7" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2M17 5a3 3 0 0 1 0 6m2 9v-2a5 5 0 0 0-3-4.6"/>',
@@ -1826,7 +1828,7 @@ function surStaffIcon(kind,size=22){
  arrowLeft:'<path d="m15 5-7 7 7 7"/>',
  arrowRight:'<path d="m9 5 7 7-7 7"/>',
  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
- heart:'<path d="M20 9c0 5-8 10-8 10S4 14 4 9a4.5 4.5 0 0 1 8-2 4.5 4.5 0 0 1 8 2Z"/>'
+ heart:'<path d="M20 9c0 5-8 10-8 10S4 14 4 9a4.5 4.5 0 0 1 8-2 4.5 4.5 0 0 1 8 2Z"/>',absence:'<path d="M5 4h14v16H5zM8 8h8M8 12h5M8 16h4"/><path d="m15 15 5 5m0-5-5 5"/>'
  };
  return '<svg aria-hidden="true" width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+(paths[kind]||paths.note)+'</svg>';
 }
@@ -1866,10 +1868,11 @@ function surStaffCards(){
   ['rehab','リハビリ中','person'],
   ['partial','部分合流','people'],
   ['observation','経過観察','clipboard'],
-  ['week','今週復帰予定','calendar']
+  ['week','今週復帰予定','calendar'],
+  ['absence','欠席','absence']
  ];
  return `<div class="sur-staff-summary">${cards.map(([kind,label,ico])=>{
-  const items=surStaffStatusCases(kind),count=new Set(items.map(c=>c.player_id)).size;
+  const items=kind==='absence'?surStaffState.absences.filter(m=>m.absence_on===surStaffToday()):surStaffStatusCases(kind),count=new Set(items.map(c=>c.player_id)).size;
   return `<button class="sur-staff-summary-card" type="button" onclick="window.surStaffShowStatus(&quot;${kind}&quot;)" aria-label="${label} ${count}名の一覧">
   <span class="sur-staff-summary-icon sur-staff-summary-${kind}">${surStaffIcon(ico,25)}</span>
   <span class="sur-staff-summary-copy"><span>${label}</span><b>${count}<small>名</small></b></span>
@@ -1881,6 +1884,12 @@ function surStaffShowStatus(kind){
  const node=document.getElementById('sur-staff-status-details');
  if(!node)return;
  if(!node.hidden&&node.dataset.current===kind){node.hidden=true;return}
+ if(kind==='absence'){
+   const today=surStaffToday(),arr=[...new Map(surStaffState.absences.filter(m=>m.absence_on===today).map(m=>[m.player_id,m])).values()];
+   node.dataset.current=kind;node.hidden=false;
+   node.innerHTML='<div class="sur-staff-detail-title"><b>欠席（'+arr.length+'名）｜'+esc(today)+'</b><button class="secondary" type="button" onclick="document.getElementById(&quot;sur-staff-status-details&quot;).hidden=true">閉じる</button></div>'+(arr.length?arr.map(m=>'<button class="sur-staff-person" type="button" onclick="window.surChat(&quot;'+esc(m.player_id)+'&quot;)"><b>'+esc(surStaffState.absenceProfiles.get(m.player_id)||'選手')+'</b><span>'+esc(m.body)+'　（'+esc(new Date(m.created_at).toLocaleString('ja-JP'))+'）</span>'+surStaffIcon('chevron',15)+'</button>').join(''):'<p class="muted">本日の欠席申請はありません。</p>');
+   return;
+  }
  const labels={rehab:'リハビリ中',partial:'部分合流',observation:'経過観察',week:'今週復帰予定'};
  const people=[...new Map(surStaffStatusCases(kind).map(c=>[c.player_id,c])).values()];
  node.dataset.current=kind;node.hidden=false;
@@ -2081,19 +2090,22 @@ async function surStaffLoadHome(){
  if(!calendar||!actions)return;
  calendar.innerHTML='<p class="muted">カレンダーを読み込み中…</p>';
  actions.innerHTML='<p class="muted">優先事項を読み込み中…</p>';
- const [checks,sessions,plans,helps,grades]=await Promise.all([
+ const [checks,sessions,plans,helps,grades,absences,absenceProfiles]=await Promise.all([
   surStaffFetchRows('sur_daily_checks','case_id,day,pain,swelling,trend',from,to,'day'),
   surStaffFetchRows('sur_sessions','case_id,completed_on',from,to,'completed_on'),
   surStaffFetchRows('sur_daily_menu_plans','case_id,day,exercise_ids',from,to,'day'),
   sb.from('sur_player_help').select('id,case_id,player_id,kind,message,created_at').eq('status','open').order('created_at',{ascending:false}).limit(500),
-  sb.from('sur_profiles').select('id,grade').eq('requested_role','player').eq('is_hidden',false).limit(600)
+  sb.from('sur_profiles').select('id,grade').eq('requested_role','player').eq('is_hidden',false).limit(600),
+  sb.from('sur_chat_messages').select('id,player_id,body,created_at,absence_on').eq('category','欠席について').gte('absence_on',surV2DateAdd(today,-7)).order('created_at',{ascending:false}).limit(1000),
+  sb.from('sur_profiles').select('id,full_name').eq('requested_role','player').eq('is_hidden',false).eq('is_archived',false).limit(600)
  ]);
  if(seq!==surStaffState.seq||!calendar.isConnected)return;
- if(checks.error||sessions.error||helps.error){
+ if(checks.error||sessions.error||helps.error||absences.error){
   calendar.innerHTML='<p class="alert">チーム記録を取得できませんでした。</p><button type="button" onclick="window.surStaffLoadHome()">再読み込み</button>';
   actions.innerHTML='<p class="alert">要対応の情報を取得できませんでした。再読み込みしてください。</p>';return;
  }
- Object.assign(surStaffState,{checks:checks.data,sessions:sessions.data,plans:plans.data,helps:helps.data||[],grades:new Map((grades.data||[]).map(g=>[g.id,g.grade||''])),truncated:checks.truncated||sessions.truncated||plans.truncated,planError:!!plans.error});
+ Object.assign(surStaffState,{checks:checks.data,sessions:sessions.data,plans:plans.data,helps:helps.data||[],absences:absences.data||[],absenceProfiles:new Map((absenceProfiles.data||[]).map(p=>[p.id,p.full_name||'選手'])),grades:new Map((grades.data||[]).map(g=>[g.id,g.grade||''])),truncated:checks.truncated||sessions.truncated||plans.truncated,planError:!!plans.error});
+ const card=document.querySelector('.sur-staff-summary');if(card){card.outerHTML=surStaffCards().split('<div id="sur-staff-status-details"')[0]}
  surStaffRenderActions();
  surStaffRenderCalendar();
  const warning=document.getElementById('sur-staff-fetch-note');
